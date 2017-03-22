@@ -18,19 +18,19 @@ public class ContactData {
 	public String getFirstName() {
 		return firstName;
 	}
-	
+
 	public String getLastName() {
 		return lastName;
 	}
-	
+
 	public String getNickName() {
 		return nickName;
 	}
-	
+
 	public String getAddress() {
 		return address;
 	}
-	
+
 	public String getEMail() {
 		return eMail;
 	}
