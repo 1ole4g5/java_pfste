@@ -2,9 +2,13 @@
 <classpath>
 	<classpathentry kind="src" path="sandbox/src/main/java"/>
 	<classpathentry kind="src" path="sandbox/src/test/java"/>
+	<classpathentry kind="src" path="addressbook/src/main/java"/>
+	<classpathentry kind="src" path="addressbook/src/test/java"/>
+	<classpathentry kind="src" path="addressbook/src/test/resources"/>
 	<classpathentry kind="lib" path="E:/Install/IDE/workspace/java_pfste/sandbox/build/libs/sandbox.jar"/>
 	<classpathentry kind="lib" path="sandbox/gradle/wrapper/gradle-wrapper.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.testng.TESTNG_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Selenium"/>
 	<classpathentry kind="output" path="sandbox/build/classes/main"/>
 </classpath>
