@@ -5,7 +5,8 @@ public class MyFirstProgram {
 		Point p1 = new Point(1, 2);
 		Point p2 = new Point(3, 6);
 
-		System.out.println("The distance between two points (using function): = " + getDistanceBetweenTwoPoints(p1, p2));
+		System.out
+				.println("The distance between two points (using function): = " + getDistanceBetweenTwoPoints(p1, p2));
 		System.out.println("The distance between two points (using method): = " + p1.getDistanceBetweenTwoPoints2(p2));
 	}
 

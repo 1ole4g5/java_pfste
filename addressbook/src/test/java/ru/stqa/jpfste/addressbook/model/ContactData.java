@@ -1,4 +1,4 @@
-package ru.stqa.jpfste.addressbook;
+package ru.stqa.jpfste.addressbook.model;
 
 public class ContactData {
 	public String firstName;
