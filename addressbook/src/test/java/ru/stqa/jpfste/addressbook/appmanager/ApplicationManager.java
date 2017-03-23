@@ -13,6 +13,8 @@ public class ApplicationManager {
 	public CreationHelper creationHelper;
 	public NavigationHelper navigationHelper;
 	public SessionHelper sessionHelper;
+	public ModificationHelper modificationHelper;
+	public HelperBase helperBase;
 
 	public void init() {
 		FirefoxBinary binary = new FirefoxBinary(new File("C:/Program Files/Mozilla Firefox/firefox.exe"));
@@ -22,6 +24,8 @@ public class ApplicationManager {
 		creationHelper = new CreationHelper(wd);
 		navigationHelper = new NavigationHelper(wd);
 		sessionHelper = new SessionHelper(wd);
+		modificationHelper = new ModificationHelper(wd);
+		helperBase = new HelperBase(wd);
 		sessionHelper.login("admin", "secret");
 	}
 

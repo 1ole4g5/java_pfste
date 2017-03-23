@@ -20,7 +20,7 @@ public class HelperBase {
 		wd.findElement(locator).clear();
 		wd.findElement(locator).sendKeys(text);
 	}
-
+	
 	protected boolean isAlertPresent() {
 		try {
 			wd.switchTo().alert();
