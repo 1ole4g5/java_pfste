@@ -1,11 +1,11 @@
 package ru.stqa.jpfste.addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.WebDriver;
 
 public class ModificationHelper extends HelperBase {
 
-	public ModificationHelper(FirefoxDriver wd) {
+	public ModificationHelper(WebDriver wd) {
 		super(wd);
 	}
 		

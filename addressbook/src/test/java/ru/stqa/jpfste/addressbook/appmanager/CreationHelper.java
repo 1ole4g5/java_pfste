@@ -1,14 +1,14 @@
 package ru.stqa.jpfste.addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.WebDriver;
 
 import ru.stqa.jpfste.addressbook.model.ContactData;
 import ru.stqa.jpfste.addressbook.model.GroupData;
 
 public class CreationHelper extends HelperBase {
 
-	public CreationHelper(FirefoxDriver wd) {
+	public CreationHelper(WebDriver wd) {
 		super(wd);
 	}
 
