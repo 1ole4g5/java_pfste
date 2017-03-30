@@ -1,12 +1,11 @@
 package ru.stqa.jpfste.addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 public class ModificationHelper extends HelperBase {
 
-	public ModificationHelper(WebDriver wd) {
-		super(wd);
+	public ModificationHelper(ApplicationManager app) {
+		super(app);
 	}
 		
 	public void editGroup() {
@@ -35,5 +34,9 @@ public class ModificationHelper extends HelperBase {
 	
 	public void acceptAlert() {
 		wd.switchTo().alert().accept();
+	}
+	
+	public boolean isThereGroup() {
+		return isElementPresent(By.name("selected[]"));
 	}
 }

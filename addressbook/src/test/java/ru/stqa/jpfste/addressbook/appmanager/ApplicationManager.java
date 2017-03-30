@@ -31,13 +31,13 @@ public class ApplicationManager {
 		} else if (browser.equals(BrowserType.CHROME)) {
 			wd = new ChromeDriver();
 		}		
-		wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		wd.get("http://localhost/addressbook/");
-		creationHelper = new CreationHelper(wd);
-		navigationHelper = new NavigationHelper(wd);
-		sessionHelper = new SessionHelper(wd);
-		modificationHelper = new ModificationHelper(wd);
-		helperBase = new HelperBase(wd);
+		creationHelper = new CreationHelper(this);
+		navigationHelper = new NavigationHelper(this);
+		sessionHelper = new SessionHelper(this);
+		modificationHelper = new ModificationHelper(this);
+		helperBase = new HelperBase(this);
 		sessionHelper.login("admin", "secret");
 	}
 
