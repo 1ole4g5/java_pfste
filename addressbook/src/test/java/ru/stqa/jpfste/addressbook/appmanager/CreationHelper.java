@@ -1,7 +1,9 @@
 package ru.stqa.jpfste.addressbook.appmanager;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
 
 import ru.stqa.jpfste.addressbook.model.ContactData;
 import ru.stqa.jpfste.addressbook.model.GroupData;
@@ -12,12 +14,18 @@ public class CreationHelper extends HelperBase {
 		super(wd);
 	}
 
-	public void fillAddNewContactForm(ContactData contactData) {
+	public void fillAddNewContactForm(ContactData contactData, boolean creation) {
 		type(By.name("firstname"), contactData.getFirstName());
 		type(By.name("lastname"), contactData.getLastName());
 		type(By.name("nickname"), contactData.getNickName());
 		type(By.name("address"), contactData.getAddress());
 		type(By.name("email"), contactData.getEMail());
+		
+		if (creation) {
+			new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+		} else {
+			Assert.assertFalse(isElementPresent(By.name("new_group")));
+		}
 	}
 
 	public void fillGroupForm(GroupData groupData) {
