@@ -16,8 +16,8 @@ public class ModificationHelper extends HelperBase {
 		click(By.cssSelector("img[title=Edit]"));	
 	}
 		
-	public void selectionItem() {
-		click(By.name("selected[]"));	
+	public void selectionItem(int index) {
+		wd.findElements(By.name("selected[]")).get(index).click();
 	}
 	
 	public void updateItem() {
