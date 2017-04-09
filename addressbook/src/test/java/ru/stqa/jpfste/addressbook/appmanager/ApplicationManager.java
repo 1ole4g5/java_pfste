@@ -44,4 +44,24 @@ public class ApplicationManager {
 	public void stop() {
 		wd.quit();
 	}
+	
+	public CreationHelper getCreationHelper() {
+		return creationHelper;
+	}
+	
+	public ModificationHelper getModificationHelper() {
+		return modificationHelper;
+	}
+	
+	public HelperBase getHelperBase() {
+		return helperBase;
+	}
+
+	public SessionHelper getSessionHelper() {
+		return sessionHelper;
+	}
+
+	public NavigationHelper getNavigationHelper() {
+		return navigationHelper;
+	}
 }

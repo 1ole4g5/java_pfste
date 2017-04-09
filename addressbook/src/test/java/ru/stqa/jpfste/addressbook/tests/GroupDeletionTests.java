@@ -8,13 +8,13 @@ public class GroupDeletionTests extends TestBase {
 
 	@Test
 	public void testGroupDeletion() {
-		app.navigationHelper.goToGroupPage();
-		if (! app.modificationHelper.isThereGroup()) {
-			app.creationHelper.createGroup(new GroupData("new group", "Group header", "Group footer"));
+		app.getNavigationHelper().goToGroupPage();
+		if (! app.getModificationHelper().isThereGroup()) {
+			app.getCreationHelper().createGroup(new GroupData("new group", "Group header", "Group footer"));
 		}
-		app.navigationHelper.goToGroupPage();
-		app.modificationHelper.selectionItem();
-		app.modificationHelper.deletionGroup();
-		app.navigationHelper.returnToHomePage();
+		app.getNavigationHelper().goToGroupPage();
+		app.getModificationHelper().selectionItem();
+		app.getModificationHelper().deletionGroup();
+		app.getNavigationHelper().returnToHomePage();
 	}
 }

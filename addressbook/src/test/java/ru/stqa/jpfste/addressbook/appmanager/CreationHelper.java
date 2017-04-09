@@ -65,5 +65,5 @@ public class CreationHelper extends HelperBase {
 		fillAddNewContactForm(contactData, creation2);
 		submitAddNewContactForm();
 		app.navigationHelper.returnToHomePage();
-	}
+	}	
 }
