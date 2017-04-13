@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 import ru.stqa.jpfste.addressbook.model.ContactData;
 
-public class ContactPhoneTests extends TestBase {
+public class ContactDisplayDataFormTests extends TestBase {
 
 	@BeforeMethod
 	public void ensurePreconditions() {
@@ -49,7 +49,7 @@ public class ContactPhoneTests extends TestBase {
 	private String mergePhones(ContactData contact) {
 		return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone())
 				.stream().filter((s) -> !s.equals(""))
-				.map(ContactPhoneTests::cleaned).collect(Collectors.joining("\n"));
+				.map(ContactDisplayDataFormTests::cleaned).collect(Collectors.joining("\n"));
 	}
 	
 	public static String cleaned(String phone) {
