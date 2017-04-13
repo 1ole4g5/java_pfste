@@ -1,36 +1,32 @@
 package ru.stqa.jpfste.addressbook.tests;
 
-import java.util.Comparator;
-import java.util.List;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
-import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import ru.stqa.jpfste.addressbook.model.GroupData;
+import ru.stqa.jpfste.addressbook.model.Groups;
 
 public class GroupModificationTests extends TestBase {
 
+	@BeforeMethod
+	public void ensurePreconditions() {
+		if (app.group().all().size() == 0) {
+			app.group().create(new GroupData().withName("new group"));
+		}
+	}
+
 	@Test
 	public void testGroupModification() {
-		app.getNavigationHelper().goToGroupPage();
-		if (! app.getModificationHelper().isThereGroup()) {
-			app.getCreationHelper().createGroup(new GroupData("new group", null, null));
-		}
-		List<GroupData> before = app.getCreationHelper().getGroupList();
-		app.getModificationHelper().selectionItem(before.size() - 1);
-		app.getModificationHelper().editGroup();
-		GroupData group = new GroupData(before.get(before.size() -1).getId(), "new group", "new header2", "new footer2");
-		app.getCreationHelper().fillGroupForm(group);
-		app.getModificationHelper().updateItem();
-		app.getNavigationHelper().goToGroupPage();
-		List<GroupData> after = app.getCreationHelper().getGroupList();
-		Assert.assertEquals(after.size(), before.size());
-				
-		before.remove(before.size() - 1);
-		before.add(group);
-		Comparator<? super GroupData> byId = (g1, g2) -> Integer.compare(g1.getId(), g1.getId());
-		before.sort(byId);
-		after.sort(byId);
-		Assert.assertEquals(before, after);
+		Groups before = app.group().all();
+		GroupData modifiedGroup = before.iterator().next();
+		GroupData group = new GroupData().withId(modifiedGroup.getId()).withName("new group").withHeader("new header2")
+		        .withFooter("new footer2");
+		app.group().modify(group);
+		Groups after = app.group().all();
+		assertThat(after.size(), equalTo(before.size()));
+		assertThat(after, equalTo(before.without(modifiedGroup).withAdded(group)));
 	}
 }

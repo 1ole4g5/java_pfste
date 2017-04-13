@@ -11,32 +11,34 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.BrowserType;
 
 public class ApplicationManager {
+
 	WebDriver wd;
 
-	public CreationHelper creationHelper;
+	public GroupHelper groupHelper;
+	public ContactHelper contactHelper;
 	public NavigationHelper navigationHelper;
 	public SessionHelper sessionHelper;
-	public ModificationHelper modificationHelper;
 	public HelperBase helperBase;
 	private String browser;
-	
-	public ApplicationManager (String browser) {
+
+	public ApplicationManager(String browser) {
 		this.browser = browser;
 	}
 
 	public void init() {
 		FirefoxBinary binary = new FirefoxBinary(new File("C:/Program Files/Mozilla Firefox/firefox.exe"));
 		if (browser.equals(BrowserType.FIREFOX)) {
-			wd = new FirefoxDriver(binary, new FirefoxProfile());;
+			wd = new FirefoxDriver(binary, new FirefoxProfile());
+			;
 		} else if (browser.equals(BrowserType.CHROME)) {
 			wd = new ChromeDriver();
-		}		
+		}
 		wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		wd.get("http://localhost/addressbook/");
-		creationHelper = new CreationHelper(this);
+		groupHelper = new GroupHelper(this);
+		contactHelper = new ContactHelper(this);
 		navigationHelper = new NavigationHelper(this);
 		sessionHelper = new SessionHelper(this);
-		modificationHelper = new ModificationHelper(this);
 		helperBase = new HelperBase(this);
 		sessionHelper.login("admin", "secret");
 	}
@@ -44,15 +46,15 @@ public class ApplicationManager {
 	public void stop() {
 		wd.quit();
 	}
-	
-	public CreationHelper getCreationHelper() {
-		return creationHelper;
+
+	public GroupHelper group() {
+		return groupHelper;
 	}
-	
-	public ModificationHelper getModificationHelper() {
-		return modificationHelper;
+
+	public ContactHelper contact() {
+		return contactHelper;
 	}
-	
+
 	public HelperBase getHelperBase() {
 		return helperBase;
 	}
@@ -61,7 +63,7 @@ public class ApplicationManager {
 		return sessionHelper;
 	}
 
-	public NavigationHelper getNavigationHelper() {
+	public NavigationHelper goTo() {
 		return navigationHelper;
 	}
 }

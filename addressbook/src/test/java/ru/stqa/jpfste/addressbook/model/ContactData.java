@@ -1,7 +1,8 @@
 package ru.stqa.jpfste.addressbook.model;
 
 public class ContactData {
-	private int id;
+
+	private int id = Integer.MIN_VALUE;
 	private String firstName;
 	private String lastName;
 	private String nickName;
@@ -9,38 +10,49 @@ public class ContactData {
 	private String eMail;
 	private String group;
 
-	public ContactData(String firstName, String lastName, String nickName, String address, String eMail, String group) {
-		this.id = Integer.MIN_VALUE;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.nickName = nickName;
-		this.address = address;
-		this.eMail = eMail;
-		this.group = group;
-	}
-	
-	public ContactData(int id, String firstName, String lastName, String nickName, String address, String eMail, String group) {
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.nickName = nickName;
-		this.address = address;
-		this.eMail = eMail;
-		this.group = group;
-	}
-
 	public int getId() {
 		return id;
 	}
-	
-	public void setId(int id) {
+
+	public ContactData withId(int id) {
 		this.id = id;
+		return this;
+	}
+
+	public ContactData withFirstName(String firstName) {
+		this.firstName = firstName;
+		return this;
+	}
+
+	public ContactData withLastName(String lastName) {
+		this.lastName = lastName;
+		return this;
+	}
+
+	public ContactData withNickName(String nickName) {
+		this.nickName = nickName;
+		return this;
+	}
+
+	public ContactData withAddress(String address) {
+		this.address = address;
+		return this;
+	}
+
+	public ContactData withMail(String eMail) {
+		this.eMail = eMail;
+		return this;
+	}
+
+	public ContactData withGroup(String group) {
+		this.group = group;
+		return this;
 	}
 
 	public String getGroup() {
 		return group;
 	}
-	
+
 	public String getFirstName() {
 		return firstName;
 	}
@@ -98,5 +110,5 @@ public class ContactData {
 		} else if (!lastName.equals(other.lastName))
 			return false;
 		return true;
-	}	
+	}
 }
