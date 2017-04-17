@@ -29,7 +29,6 @@ public class ApplicationManager {
 		FirefoxBinary binary = new FirefoxBinary(new File("C:/Program Files/Mozilla Firefox/firefox.exe"));
 		if (browser.equals(BrowserType.FIREFOX)) {
 			wd = new FirefoxDriver(binary, new FirefoxProfile());
-			;
 		} else if (browser.equals(BrowserType.CHROME)) {
 			wd = new ChromeDriver();
 		}

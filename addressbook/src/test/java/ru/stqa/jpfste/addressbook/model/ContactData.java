@@ -2,7 +2,7 @@ package ru.stqa.jpfste.addressbook.model;
 
 public class ContactData {
 
-	private int id = Integer.MIN_VALUE;
+	private int id = Integer.MAX_VALUE;
 	private String firstName;
 	private String lastName;
 	private String nickName;
@@ -155,9 +155,6 @@ public class ContactData {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((address == null) ? 0 : address.hashCode());
-		result = prime * result + ((allEMails == null) ? 0 : allEMails.hashCode());
-		result = prime * result + ((allPhones == null) ? 0 : allPhones.hashCode());
 		result = prime * result + ((eMail_1 == null) ? 0 : eMail_1.hashCode());
 		result = prime * result + ((eMail_2 == null) ? 0 : eMail_2.hashCode());
 		result = prime * result + ((eMail_3 == null) ? 0 : eMail_3.hashCode());
@@ -181,21 +178,6 @@ public class ContactData {
 		if (getClass() != obj.getClass())
 			return false;
 		ContactData other = (ContactData) obj;
-		if (address == null) {
-			if (other.address != null)
-				return false;
-		} else if (!address.equals(other.address))
-			return false;
-		if (allEMails == null) {
-			if (other.allEMails != null)
-				return false;
-		} else if (!allEMails.equals(other.allEMails))
-			return false;
-		if (allPhones == null) {
-			if (other.allPhones != null)
-				return false;
-		} else if (!allPhones.equals(other.allPhones))
-			return false;
 		if (eMail_1 == null) {
 			if (other.eMail_1 != null)
 				return false;

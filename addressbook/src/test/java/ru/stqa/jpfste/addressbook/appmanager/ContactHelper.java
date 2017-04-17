@@ -47,12 +47,12 @@ public class ContactHelper extends HelperBase {
 		return wd.findElements(By.name("selected[]")).size();
 	}
 
-	public void editContact() {
-		click(By.cssSelector("img[title=Edit]"));
+	public void editContact(int id) {
+		click(By.cssSelector(String.format("a[href='edit.php?id=%s']", id)));
 	}
 
 	public void selectContactById(int id) {
-		wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+		click(By.cssSelector("input[value='" + id + "']"));
 	}
 
 	public void updateItem() {
@@ -67,16 +67,16 @@ public class ContactHelper extends HelperBase {
 		wd.switchTo().alert().accept();
 	}
 
-	public void create(ContactData contactData, boolean creation2) {
+	public void create(ContactData contactData) {
 		goToAddNewContactPage();
-		fillAddNewContactForm(contactData, creation2);
+		fillAddNewContactForm(contactData, true);
 		submitAddNewContactForm();
 		contactCache = null;
 	}
 
 	public void modify(ContactData contact) {
 		selectContactById(contact.getId());
-		editContact();
+		editContact(contact.getId());
 		fillAddNewContactForm(contact, false);
 		updateItem();
 		contactCache = null;
@@ -101,13 +101,13 @@ public class ContactHelper extends HelperBase {
 		for (WebElement element : elements) {
 			List<WebElement> cells = element.findElements(By.tagName("td"));
 			int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
-			String firstName = cells.get(1).getText();
-			String lastName = cells.get(2).getText();
+			String firstName = cells.get(2).getText();
+			String lastName = cells.get(1).getText();
 			String allPhones = cells.get(5).getText();
 			String allEMails = cells.get(4).getText();
-			String allAddress = cells.get(3).getText();
+			String address = cells.get(3).getText();
 			contactCache.add(new ContactData().withId(id).withFirstName(firstName).withLastName(lastName)
-			        .withGroup("new group").withAllPhones(allPhones).withAllEMails(allEMails).withAddress(allAddress));
+			        .withGroup("new group").withAllPhones(allPhones).withAllEMails(allEMails).withAddress(address));
 		}
 		return new Contacts(contactCache);
 	}
