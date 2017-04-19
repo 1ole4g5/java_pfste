@@ -16,6 +16,12 @@ public class ContactData {
 	private String workPhone;
 	private String allPhones;
 	private String allEMails;
+	private String allDetails;	
+
+	public ContactData withAllDetails(String allDetails) {
+		this.allDetails = allDetails;
+		return this;
+	}
 
 	public ContactData withId(int id) {
 		this.id = id;
@@ -142,19 +148,28 @@ public class ContactData {
 	public String getAllEMails() {
 		return allEMails;
 	}
+	
+	public String getAllDetails() {
+		return allDetails;
+	}
 
 	@Override
 	public String toString() {
 		return "ContactData [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", nickName="
 		        + nickName + ", address=" + address + ", eMail_1=" + eMail_1 + ", eMail_2=" + eMail_2 + ", eMail_3="
 		        + eMail_3 + ", group=" + group + ", homePhone=" + homePhone + ", mobilePhone=" + mobilePhone
-		        + ", workPhone=" + workPhone + ", allPhones=" + allPhones + ", allEMails=" + allEMails + "]";
+		        + ", workPhone=" + workPhone + ", allPhones=" + allPhones + ", allEMails=" + allEMails + ", allDetails="
+		        + allDetails + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((address == null) ? 0 : address.hashCode());
+		result = prime * result + ((allDetails == null) ? 0 : allDetails.hashCode());
+		result = prime * result + ((allEMails == null) ? 0 : allEMails.hashCode());
+		result = prime * result + ((allPhones == null) ? 0 : allPhones.hashCode());
 		result = prime * result + ((eMail_1 == null) ? 0 : eMail_1.hashCode());
 		result = prime * result + ((eMail_2 == null) ? 0 : eMail_2.hashCode());
 		result = prime * result + ((eMail_3 == null) ? 0 : eMail_3.hashCode());
@@ -178,6 +193,26 @@ public class ContactData {
 		if (getClass() != obj.getClass())
 			return false;
 		ContactData other = (ContactData) obj;
+		if (address == null) {
+			if (other.address != null)
+				return false;
+		} else if (!address.equals(other.address))
+			return false;
+		if (allDetails == null) {
+			if (other.allDetails != null)
+				return false;
+		} else if (!allDetails.equals(other.allDetails))
+			return false;
+		if (allEMails == null) {
+			if (other.allEMails != null)
+				return false;
+		} else if (!allEMails.equals(other.allEMails))
+			return false;
+		if (allPhones == null) {
+			if (other.allPhones != null)
+				return false;
+		} else if (!allPhones.equals(other.allPhones))
+			return false;
 		if (eMail_1 == null) {
 			if (other.eMail_1 != null)
 				return false;
