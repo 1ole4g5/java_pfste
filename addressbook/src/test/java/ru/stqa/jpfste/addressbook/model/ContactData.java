@@ -16,7 +16,7 @@ public class ContactData {
 	private String workPhone;
 	private String allPhones;
 	private String allEMails;
-	private String allDetails;	
+	private String allDetails;
 
 	public ContactData withAllDetails(String allDetails) {
 		this.allDetails = allDetails;
@@ -57,7 +57,7 @@ public class ContactData {
 		this.workPhone = workPhone;
 		return this;
 	}
-	
+
 	public ContactData withAddress(String address) {
 		this.address = address;
 		return this;
@@ -148,7 +148,7 @@ public class ContactData {
 	public String getAllEMails() {
 		return allEMails;
 	}
-	
+
 	public String getAllDetails() {
 		return allDetails;
 	}

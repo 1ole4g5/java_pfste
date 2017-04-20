@@ -106,13 +106,13 @@ public class ContactHelper extends HelperBase {
 			String allPhones = cells.get(5).getText();
 			String allEMails = cells.get(4).getText();
 			String address = cells.get(3).getText();
-			String allDetails = firstName + lastName + allPhones + allEMails + address;
+			String allDetails = firstName + "\n" + lastName + "\n" + address + allPhones;
 			contactCache.add(new ContactData().withId(id).withFirstName(firstName).withLastName(lastName)
-			        .withAllPhones(allPhones).withAllEMails(allEMails).withAddress(address).withAllDetails(allDetails));
+			        .withAddress(address).withAllPhones(allPhones).withAllEMails(allEMails).withAllDetails(allDetails));
 		}
 		return new Contacts(contactCache);
 	}
-	
+
 	public ContactData infoFromEditForm(ContactData contact) {
 		initContactModificationById(contact.getId());
 		String firstName = wd.findElement(By.name("firstname")).getAttribute("value");
@@ -143,11 +143,11 @@ public class ContactHelper extends HelperBase {
 		List<WebElement> cells = row.findElements(By.tagName("td"));
 		cells.get(6).findElement(By.tagName("a")).click();
 	}
-	
+
 	public ContactData infoFromDetailsForm(ContactData contact) {
 		initContactModificationDetailsById(contact.getId());
 		String allDetails = wd.findElement(By.cssSelector("#content")).getText();
-		wd.navigate().back();		
+		wd.navigate().back();
 		return new ContactData().withId(contact.getId()).withAllDetails(allDetails);
 	}
 }

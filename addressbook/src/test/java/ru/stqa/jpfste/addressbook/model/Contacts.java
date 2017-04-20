@@ -28,7 +28,7 @@ public class Contacts extends ForwardingSet<ContactData> {
 		contacts.remove(contact);
 		return contacts;
 	}
-	
+
 	@Override
 	protected Set<ContactData> delegate() {
 		return delegate;

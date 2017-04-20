@@ -29,7 +29,7 @@ public class ContactDisplayDataFormTests extends TestBase {
 		ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
 		assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
 	}
-	
+
 	@Test
 	public void testContactAddress() {
 		app.goTo().returnToHomePage();
@@ -45,26 +45,24 @@ public class ContactDisplayDataFormTests extends TestBase {
 		ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
 		assertThat(contact.getAllEMails(), equalTo(mergeEMails(contactInfoFromEditForm)));
 	}
-	
+
 	private String mergePhones(ContactData contact) {
-		return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone())
-				.stream().filter((s) -> !s.equals(""))
-				.map(ContactDisplayDataFormTests::cleaned).collect(Collectors.joining("\n"));
+		return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone()).stream()
+		        .filter((s) -> !s.equals("")).map(ContactDisplayDataFormTests::cleaned)
+		        .collect(Collectors.joining("\n"));
 	}
-	
+
 	public static String cleaned(String phone) {
 		return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
 	}
-	
+
 	private String mergeAddress(ContactData contact) {
-		return Arrays.asList(contact.getAddress())
-				.stream().filter((s) -> !s.equals(""))
-				.collect(Collectors.joining("\n"));
+		return Arrays.asList(contact.getAddress()).stream().filter((s) -> !s.equals(""))
+		        .collect(Collectors.joining("\n"));
 	}
-	
+
 	private String mergeEMails(ContactData contact) {
-		return Arrays.asList(contact.getFirstEMail(), contact.getSecondEMail(), contact.getThirdEMail())
-				.stream().filter((s) -> !s.equals(""))
-				.collect(Collectors.joining("\n"));
+		return Arrays.asList(contact.getFirstEMail(), contact.getSecondEMail(), contact.getThirdEMail()).stream()
+		        .filter((s) -> !s.equals("")).collect(Collectors.joining("\n"));
 	}
 }
