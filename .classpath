@@ -14,5 +14,8 @@
 	<classpathentry kind="lib" path="E:/Work/Selenium/Libs/jcommander-1.69.jar"/>
 	<classpathentry kind="lib" path="E:/Work/Selenium/Libs/xstream-1.4.9.jar"/>
 	<classpathentry kind="lib" path="E:/Work/Selenium/Libs/gson-2.8.0.jar"/>
+	<classpathentry kind="lib" path="E:/Work/Selenium/Libs/slf4j-1.7.25/slf4j-api-1.7.25.jar"/>
+	<classpathentry kind="lib" path="E:/Work/Selenium/Libs/logback-core-1.2.2.jar"/>
+	<classpathentry kind="lib" path="E:/Work/Selenium/Libs/logback-classic-1.2.2.jar"/>
 	<classpathentry kind="output" path="sandbox/build/classes/main"/>
 </classpath>

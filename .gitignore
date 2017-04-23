@@ -16,3 +16,5 @@ gradle-app.setting
 .settings
 
 test-output
+
+*.log
