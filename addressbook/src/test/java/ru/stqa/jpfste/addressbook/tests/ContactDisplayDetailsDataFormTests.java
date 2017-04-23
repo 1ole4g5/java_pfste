@@ -30,7 +30,6 @@ public class ContactDisplayDetailsDataFormTests extends TestBase {
 	}
 
 	private String mergeDetails(ContactData contact) {
-
 		return Arrays.asList(contact.getAllDetails()).stream().filter((s) -> !(s == null || s.equals("")))
 		        .map(ContactDisplayDetailsDataFormTests::cleaned).collect(Collectors.joining("\n"));
 	}

@@ -11,5 +11,8 @@
 	<classpathentry kind="con" path="org.testng.TESTNG_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Selenium"/>
 	<classpathentry kind="lib" path="E:/Work/Selenium/Libs/java-hamcrest-2.0.0.0.jar"/>
+	<classpathentry kind="lib" path="E:/Work/Selenium/Libs/jcommander-1.69.jar"/>
+	<classpathentry kind="lib" path="E:/Work/Selenium/Libs/xstream-1.4.9.jar"/>
+	<classpathentry kind="lib" path="E:/Work/Selenium/Libs/gson-2.8.0.jar"/>
 	<classpathentry kind="output" path="sandbox/build/classes/main"/>
 </classpath>
