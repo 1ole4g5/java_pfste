@@ -1,6 +1,10 @@
 package ru.stqa.jpfste.addressbook.appmanager;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
@@ -11,7 +15,7 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.BrowserType;
 
 public class ApplicationManager {
-
+	private final Properties properties;
 	WebDriver wd;
 
 	public GroupHelper groupHelper;
@@ -22,24 +26,28 @@ public class ApplicationManager {
 	private String browser;
 
 	public ApplicationManager(String browser) {
-		this.browser = browser;
+		this.browser = browser;		
+		properties = new Properties();
 	}
 
-	public void init() {
-		FirefoxBinary binary = new FirefoxBinary(new File("C:/Program Files/Mozilla Firefox/firefox.exe"));
+	public void init() throws FileNotFoundException, IOException {
+		String target = System.getProperty("target", "local");
+		properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+		FirefoxBinary binary = new FirefoxBinary(new File(properties.getProperty("pathToFirefoxBrowser")));
+		
 		if (browser.equals(BrowserType.FIREFOX)) {
 			wd = new FirefoxDriver(binary, new FirefoxProfile());
 		} else if (browser.equals(BrowserType.CHROME)) {
 			wd = new ChromeDriver();
 		}
 		wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-		wd.get("http://localhost/addressbook/");
+		wd.get(properties.getProperty("web.baseUrl"));
 		groupHelper = new GroupHelper(this);
 		contactHelper = new ContactHelper(this);
 		navigationHelper = new NavigationHelper(this);
 		sessionHelper = new SessionHelper(this);
 		helperBase = new HelperBase(this);
-		sessionHelper.login("admin", "secret");
+		sessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
 	}
 
 	public void stop() {
