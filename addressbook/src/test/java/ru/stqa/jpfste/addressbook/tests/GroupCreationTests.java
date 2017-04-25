@@ -12,8 +12,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -79,9 +77,9 @@ public class GroupCreationTests extends TestBase {
 	@Test(dataProvider = "validGroupsFromJson")
 	public void testGroupCreation(GroupData group) {
 		app.group().groupPage();
-		Groups before = app.group().all();
+		Groups before = app.db().groups();
 		app.group().create(group);
-		Groups after = app.group().all();
+		Groups after = app.db().groups();
 		assertThat(app.group().count(), equalTo(before.size() + 1));
 		assertThat(after,
 		        equalTo(before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
@@ -90,10 +88,10 @@ public class GroupCreationTests extends TestBase {
 	@Test(dataProvider = "inValidGroups", enabled = false)
 	public void testBadGroupCreation(GroupData group) {
 		app.group().groupPage();
-		Groups before = app.group().all();
+		Groups before = app.db().groups();
 		app.group().create(group);
 		assertThat(app.group().count(), equalTo(before.size()));
-		Groups after = app.group().all();
+		Groups after = app.db().groups();
 		assertThat(after, equalTo(before));
 	}
 }

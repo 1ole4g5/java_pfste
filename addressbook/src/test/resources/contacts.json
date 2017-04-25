@@ -4,47 +4,5 @@
     "lastName": "lastName 0",
     "address": "address 0",
     "mobilePhone": "mobilePhone 0"
-  },
-  {
-    "firstName": "firstName 1",
-    "lastName": "lastName 1",
-    "address": "address 1",
-    "mobilePhone": "mobilePhone 1"
-  },
-  {
-    "firstName": "firstName 2",
-    "lastName": "lastName 2",
-    "address": "address 2",
-    "mobilePhone": "mobilePhone 2"
-  },
-  {
-    "firstName": "firstName 3",
-    "lastName": "lastName 3",
-    "address": "address 3",
-    "mobilePhone": "mobilePhone 3"
-  },
-  {
-    "firstName": "firstName 4",
-    "lastName": "lastName 4",
-    "address": "address 4",
-    "mobilePhone": "mobilePhone 4"
-  },
-  {
-    "firstName": "firstName 5",
-    "lastName": "lastName 5",
-    "address": "address 5",
-    "mobilePhone": "mobilePhone 5"
-  },
-  {
-    "firstName": "firstName 6",
-    "lastName": "lastName 6",
-    "address": "address 6",
-    "mobilePhone": "mobilePhone 6"
-  },
-  {
-    "firstName": "firstName 7",
-    "lastName": "lastName 7",
-    "address": "address 7",
-    "mobilePhone": "mobilePhone 7"
   }
 ]

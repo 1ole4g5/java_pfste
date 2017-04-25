@@ -1,5 +1,6 @@
 package ru.stqa.jpfste.addressbook.model;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,6 +16,10 @@ public class Groups extends ForwardingSet<GroupData> {
 
 	public Groups() {
 		this.delegate = new HashSet<GroupData>();
+	}
+	
+	public Groups(Collection<GroupData> groups) {
+		this.delegate = new HashSet<GroupData>(groups);
 	}
 
 	@Override

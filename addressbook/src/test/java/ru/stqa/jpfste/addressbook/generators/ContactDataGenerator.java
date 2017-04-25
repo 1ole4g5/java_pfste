@@ -68,7 +68,6 @@ public class ContactDataGenerator {
 		try (Writer writer = new FileWriter(file)) {
 			writer.write(xml);
 		}
-		;
 	}
 
 	private void saveAsCsv(List<ContactData> contacts, File file) throws IOException {
@@ -83,9 +82,8 @@ public class ContactDataGenerator {
 	private static List<ContactData> generateContacts(int count) {
 		List<ContactData> contacts = new ArrayList<ContactData>();
 		for (int i = 0; i < count; i++) {
-			contacts.add(new ContactData().withFirstName(String.format("firstName %s", i))
-			        .withLastName(String.format("lastName %s", i)).withAddress(String.format("address %s", i))
-			        .withMobilePhone(String.format("mobilePhone %s", i)));
+			contacts.add(new ContactData().withFirstName(String.format("firstName %s", i)).withLastName(String.format("lastName %s", i))
+					.withAddress(String.format("address %s", i)).withMobilePhone(String.format("mobilePhone %s", i)));
 		}
 		return contacts;
 	}

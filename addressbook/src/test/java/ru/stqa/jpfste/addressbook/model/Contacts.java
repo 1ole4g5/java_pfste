@@ -1,5 +1,6 @@
 package ru.stqa.jpfste.addressbook.model;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,9 +13,13 @@ public class Contacts extends ForwardingSet<ContactData> {
 	public Contacts(Contacts contacts) {
 		this.delegate = new HashSet<ContactData>(contacts.delegate);
 	}
-
+	
 	public Contacts() {
 		this.delegate = new HashSet<ContactData>();
+	}
+	
+	public Contacts(Collection<ContactData> contacts) {
+		this.delegate = new HashSet<ContactData>(contacts);
 	}
 
 	public Contacts withAdded(ContactData contact) {

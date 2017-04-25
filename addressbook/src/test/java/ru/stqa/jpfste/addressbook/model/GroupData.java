@@ -1,20 +1,52 @@
 package ru.stqa.jpfste.addressbook.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Type;
+
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 @XStreamAlias("group")
+@Entity
+@Table(name = "group_list")
 public class GroupData {
 
 	@XStreamOmitField
+	@Id
+	@Column(name = "group_id")
 	private int id = Integer.MAX_VALUE;
+	
 	@Expose
+	@Column(name = "group_name")
 	private String name;
+	
 	@Expose
+	@Column(name = "group_header")
+	@Type(type = "text")
 	private String header;
+	
 	@Expose
+	@Column(name = "group_footer")
+	@Type(type = "text")
 	private String footer;
+	
+	@Column(name = "domain_id")
+	@Type(type = "int")
+	private int domain_id;
+	
+	public int getDomainId() {
+		return domain_id;
+	}
+	
+	public GroupData withDomainId(int domain_id) {
+		this.domain_id = domain_id;
+		return this;
+	}
 
 	public int getId() {
 		return id;
@@ -54,13 +86,16 @@ public class GroupData {
 
 	@Override
 	public String toString() {
-		return "GroupData [id=" + id + ", name=" + name + "]";
+		return "GroupData [id=" + id + ", name=" + name + ", header=" + header + ", footer=" + footer + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + domain_id;
+		result = prime * result + ((footer == null) ? 0 : footer.hashCode());
+		result = prime * result + ((header == null) ? 0 : header.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
@@ -75,6 +110,18 @@ public class GroupData {
 		if (getClass() != obj.getClass())
 			return false;
 		GroupData other = (GroupData) obj;
+		if (domain_id != other.domain_id)
+			return false;
+		if (footer == null) {
+			if (other.footer != null)
+				return false;
+		} else if (!footer.equals(other.footer))
+			return false;
+		if (header == null) {
+			if (other.header != null)
+				return false;
+		} else if (!header.equals(other.header))
+			return false;
 		if (id != other.id)
 			return false;
 		if (name == null) {

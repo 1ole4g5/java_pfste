@@ -1,42 +1,99 @@
 package ru.stqa.jpfste.addressbook.model;
 
-import java.io.File;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.Type;
 
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
+@Entity
+@Table(name = "addressbook")
 @XStreamAlias("contact")
 public class ContactData {
 
 	@XStreamOmitField
+	@Id
+	@Column(name = "id")
 	private int id = Integer.MAX_VALUE;
+	
 	@Expose
+	@Column(name = "firstname")
 	private String firstName;
+	
 	@Expose
+	@Column(name = "lastname")
 	private String lastName;
+	
+	@Column(name = "nickname")
 	private String nickName;
+	
 	@Expose
+	@Column(name = "address")
+	@Type(type = "text")
 	private String address;
+	
+	@Column(name = "email")
+	@Type(type = "text")
 	private String eMail_1;
+	
+	@Column(name = "email2")
+	@Type(type = "text")
 	private String eMail_2;
+	
+	@Column(name = "email3")
+	@Type(type = "text")
 	private String eMail_3;
+	
+	@Transient
 	private String group;
+	
+	@Column(name = "home")
+	@Type(type = "text")
 	private String homePhone;
+	
 	@Expose
+	@Column(name = "mobile")
+	@Type(type = "text")
 	private String mobilePhone;
+	
+	@Column(name = "work")
+	@Type(type = "text")
 	private String workPhone;
+	
+	@Transient
 	private String allPhones;
+	
+	@Transient
 	private String allEMails;
+	
+	@Transient
 	private String allDetails;
-	private File photo;
+	
+	@Transient
+//	@Column(name = "photo")
+//	@Type(type = "text")
+	private String photo;
 
-	public File getPhoto() {
-		return photo;
-	}
-
-	public ContactData withPhoto(File photo) {
-		this.photo = photo;
+//	public File getPhoto() {
+//		return new File(photo);
+//	}
+//
+//	public ContactData withPhoto(File photo) {
+//		this.photo = photo.getPath();
+//		return this;
+//	}
+	@Column(name = "domain_id")
+	@Type(type = "int")
+	private int domain_id;
+	
+	public ContactData withDomainId(int domain_id) {
+		this.domain_id = domain_id;
 		return this;
 	}
 
@@ -174,6 +231,10 @@ public class ContactData {
 	public String getAllDetails() {
 		return allDetails;
 	}
+	
+	public int getDomain_id() {
+		return domain_id;
+	}
 
 	@Override
 	public String toString() {
@@ -181,7 +242,7 @@ public class ContactData {
 		        + nickName + ", address=" + address + ", eMail_1=" + eMail_1 + ", eMail_2=" + eMail_2 + ", eMail_3="
 		        + eMail_3 + ", group=" + group + ", homePhone=" + homePhone + ", mobilePhone=" + mobilePhone
 		        + ", workPhone=" + workPhone + ", allPhones=" + allPhones + ", allEMails=" + allEMails + ", allDetails="
-		        + allDetails + "]";
+		        + allDetails + ", photo=" + photo + ", domain_id=" + domain_id + "]";
 	}
 
 	@Override
@@ -189,20 +250,11 @@ public class ContactData {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
-		result = prime * result + ((allDetails == null) ? 0 : allDetails.hashCode());
-		result = prime * result + ((allEMails == null) ? 0 : allEMails.hashCode());
-		result = prime * result + ((allPhones == null) ? 0 : allPhones.hashCode());
-		result = prime * result + ((eMail_1 == null) ? 0 : eMail_1.hashCode());
-		result = prime * result + ((eMail_2 == null) ? 0 : eMail_2.hashCode());
-		result = prime * result + ((eMail_3 == null) ? 0 : eMail_3.hashCode());
+		result = prime * result + domain_id;
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + ((group == null) ? 0 : group.hashCode());
-		result = prime * result + ((homePhone == null) ? 0 : homePhone.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((mobilePhone == null) ? 0 : mobilePhone.hashCode());
-		result = prime * result + ((nickName == null) ? 0 : nickName.hashCode());
-		result = prime * result + ((workPhone == null) ? 0 : workPhone.hashCode());
 		return result;
 	}
 
@@ -220,50 +272,12 @@ public class ContactData {
 				return false;
 		} else if (!address.equals(other.address))
 			return false;
-		if (allDetails == null) {
-			if (other.allDetails != null)
-				return false;
-		} else if (!allDetails.equals(other.allDetails))
-			return false;
-		if (allEMails == null) {
-			if (other.allEMails != null)
-				return false;
-		} else if (!allEMails.equals(other.allEMails))
-			return false;
-		if (allPhones == null) {
-			if (other.allPhones != null)
-				return false;
-		} else if (!allPhones.equals(other.allPhones))
-			return false;
-		if (eMail_1 == null) {
-			if (other.eMail_1 != null)
-				return false;
-		} else if (!eMail_1.equals(other.eMail_1))
-			return false;
-		if (eMail_2 == null) {
-			if (other.eMail_2 != null)
-				return false;
-		} else if (!eMail_2.equals(other.eMail_2))
-			return false;
-		if (eMail_3 == null) {
-			if (other.eMail_3 != null)
-				return false;
-		} else if (!eMail_3.equals(other.eMail_3))
+		if (domain_id != other.domain_id)
 			return false;
 		if (firstName == null) {
 			if (other.firstName != null)
 				return false;
 		} else if (!firstName.equals(other.firstName))
-			return false;
-		if (group == null) {
-			if (other.group != null)
-				return false;
-		} else if (!group.equals(other.group))
-			return false;
-		if (homePhone == null) {
-			if (other.homePhone != null)
-				return false;
-		} else if (!homePhone.equals(other.homePhone))
 			return false;
 		if (id != other.id)
 			return false;
@@ -276,16 +290,6 @@ public class ContactData {
 			if (other.mobilePhone != null)
 				return false;
 		} else if (!mobilePhone.equals(other.mobilePhone))
-			return false;
-		if (nickName == null) {
-			if (other.nickName != null)
-				return false;
-		} else if (!nickName.equals(other.nickName))
-			return false;
-		if (workPhone == null) {
-			if (other.workPhone != null)
-				return false;
-		} else if (!workPhone.equals(other.workPhone))
 			return false;
 		return true;
 	}

@@ -27,13 +27,26 @@ public class ContactHelper extends HelperBase {
 		type(By.name("home"), contactData.getHomePhone());
 		type(By.name("mobile"), contactData.getMobilePhone());
 		type(By.name("work"), contactData.getWorkPhone());
-		attach(By.name("photo"), contactData.getPhoto());
-
+		
 		if (creation) {
 			new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
 		} else {
 			Assert.assertFalse(isElementPresent(By.name("new_group")));
 		}
+	}
+	
+	public void fillAddNewContactForm(ContactData contactData) {
+		type(By.name("firstname"), contactData.getFirstName());
+		type(By.name("lastname"), contactData.getLastName());
+		type(By.name("nickname"), contactData.getNickName());
+		type(By.name("address"), contactData.getAddress());
+		type(By.name("email"), contactData.getFirstEMail());
+		type(By.name("email2"), contactData.getSecondEMail());
+		type(By.name("email3"), contactData.getThirdEMail());
+		type(By.name("home"), contactData.getHomePhone());
+		type(By.name("mobile"), contactData.getMobilePhone());
+		type(By.name("work"), contactData.getWorkPhone());
+		// attach(By.name("photo"), contactData.getPhoto());
 	}
 
 	public void submitAddNewContactForm() {
@@ -70,7 +83,7 @@ public class ContactHelper extends HelperBase {
 
 	public void create(ContactData contactData) {
 		goToAddNewContactPage();
-		fillAddNewContactForm(contactData, true);
+		fillAddNewContactForm(contactData);
 		submitAddNewContactForm();
 		contactCache = null;
 	}

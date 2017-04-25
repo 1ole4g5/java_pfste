@@ -24,6 +24,7 @@ public class ApplicationManager {
 	public SessionHelper sessionHelper;
 	public HelperBase helperBase;
 	private String browser;
+	private DbHelper dbHelper;
 
 	public ApplicationManager(String browser) {
 		this.browser = browser;		
@@ -34,6 +35,8 @@ public class ApplicationManager {
 		String target = System.getProperty("target", "local");
 		properties.load(new FileReader(new File(String.format("addressbook/src/test/resources/%s.properties", target))));
 		FirefoxBinary binary = new FirefoxBinary(new File(properties.getProperty("pathToFirefoxBrowser")));
+		
+		dbHelper = new DbHelper();
 		
 		if (browser.equals(BrowserType.FIREFOX)) {
 			wd = new FirefoxDriver(binary, new FirefoxProfile());
@@ -72,5 +75,9 @@ public class ApplicationManager {
 
 	public NavigationHelper goTo() {
 		return navigationHelper;
+	}
+	
+	public DbHelper db() {
+		return dbHelper;
 	}
 }
