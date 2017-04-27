@@ -5,6 +5,9 @@
 	<classpathentry kind="src" path="addressbook/src/main/java"/>
 	<classpathentry kind="src" path="addressbook/src/test/java"/>
 	<classpathentry kind="src" path="addressbook/src/test/resources"/>
+	<classpathentry kind="src" path="mantis-tests/src/main/java"/>
+	<classpathentry kind="src" path="mantis-tests/src/test/java"/>
+	<classpathentry kind="src" path="mantis-tests/src/test/resources"/>
 	<classpathentry kind="lib" path="E:/Install/IDE/workspace/java_pfste/sandbox/build/libs/sandbox.jar"/>
 	<classpathentry kind="lib" path="sandbox/gradle/wrapper/gradle-wrapper.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
