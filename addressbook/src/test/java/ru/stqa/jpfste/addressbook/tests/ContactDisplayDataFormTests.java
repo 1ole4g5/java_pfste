@@ -18,7 +18,7 @@ public class ContactDisplayDataFormTests extends TestBase {
 		if (app.contact().all().size() == 0) {
 			app.contact().create(new ContactData().withFirstName("First name").withLastName("Last name")
 			        .withAddress("789-)01").withFirstEMail("test@test.com").withSecondEMail("1@1").withThirdEMail("1+1")
-			        .withHomePhone("+7(111)").withMobilePhone("2-2-2").withWorkPhone("3 3 3").withGroup("new group"));
+			        .withHomePhone("+7(111)").withMobilePhone("2-2-2").withWorkPhone("3 3 3"));
 		}
 	}
 

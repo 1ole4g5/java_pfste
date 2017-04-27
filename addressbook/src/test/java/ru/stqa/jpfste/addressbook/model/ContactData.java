@@ -1,8 +1,15 @@
 package ru.stqa.jpfste.addressbook.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -50,9 +57,6 @@ public class ContactData {
 	@Type(type = "text")
 	private String eMail_3;
 	
-	@Transient
-	private String group;
-	
 	@Column(name = "home")
 	@Type(type = "text")
 	private String homePhone;
@@ -91,6 +95,11 @@ public class ContactData {
 	@Column(name = "domain_id")
 	@Type(type = "int")
 	private int domain_id;
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "address_in_groups", 
+		joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+	private Set<GroupData> groups = new HashSet<GroupData>();
 	
 	public ContactData withDomainId(int domain_id) {
 		this.domain_id = domain_id;
@@ -157,11 +166,6 @@ public class ContactData {
 		return this;
 	}
 
-	public ContactData withGroup(String group) {
-		this.group = group;
-		return this;
-	}
-
 	public ContactData withAllPhones(String allPhones) {
 		this.allPhones = allPhones;
 		return this;
@@ -174,10 +178,6 @@ public class ContactData {
 
 	public int getId() {
 		return id;
-	}
-
-	public String getGroup() {
-		return group;
 	}
 
 	public String getFirstName() {
@@ -235,14 +235,14 @@ public class ContactData {
 	public int getDomain_id() {
 		return domain_id;
 	}
+	
+	public Groups getGroups() {
+		return new Groups(groups);
+	}
 
 	@Override
 	public String toString() {
-		return "ContactData [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", nickName="
-		        + nickName + ", address=" + address + ", eMail_1=" + eMail_1 + ", eMail_2=" + eMail_2 + ", eMail_3="
-		        + eMail_3 + ", group=" + group + ", homePhone=" + homePhone + ", mobilePhone=" + mobilePhone
-		        + ", workPhone=" + workPhone + ", allPhones=" + allPhones + ", allEMails=" + allEMails + ", allDetails="
-		        + allDetails + ", photo=" + photo + ", domain_id=" + domain_id + "]";
+		return "ContactData [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + "]";
 	}
 
 	@Override
@@ -292,5 +292,11 @@ public class ContactData {
 		} else if (!mobilePhone.equals(other.mobilePhone))
 			return false;
 		return true;
+	}
+	
+	public ContactData inGroup(GroupData group) {
+		groups.add(group);
+		return this;
+		
 	}
 }

@@ -1,8 +1,14 @@
 package ru.stqa.jpfste.addressbook.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
@@ -39,6 +45,17 @@ public class GroupData {
 	@Type(type = "int")
 	private int domain_id;
 	
+	@ManyToMany(mappedBy = "groups")
+	private Set<ContactData> contacts = new HashSet<ContactData>();
+		
+//	public Set<ContactData> getContacts() {
+//		return contacts;
+//	}
+	
+	public Contacts getContacts() {
+		return new Contacts(contacts);
+	}
+
 	public int getDomainId() {
 		return domain_id;
 	}

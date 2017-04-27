@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -23,6 +24,7 @@ import com.thoughtworks.xstream.io.xml.StaxDriver;
 import ru.stqa.jpfste.addressbook.model.ContactData;
 import ru.stqa.jpfste.addressbook.model.Contacts;
 import ru.stqa.jpfste.addressbook.model.GroupData;
+import ru.stqa.jpfste.addressbook.model.Groups;
 
 public class ContactCreationTests extends TestBase {
 
@@ -75,17 +77,27 @@ public class ContactCreationTests extends TestBase {
 			return list.iterator();
 		}
 	}
+	
+	@BeforeMethod
+	public void ensurePreconditions() {
+		if (app.db().groups().size() == 0) {
+			app.group().create(new GroupData().withName("new group"));
+			app.goTo().returnToHomePage();
+		}
+	}
 
 	@Test(dataProvider = "validContactsFromJson")
 	public void testContactCreation(ContactData contact) {
-		Contacts before = app.db().contacts();
+		// Contacts before = app.db().contacts();
+		Contacts before = app.contact().all();
+		Groups groups = app.db().groups();
 		app.contact().goToAddNewContactPage();
-		app.contact().create(contact);
+		// app.contact().create(contact.inGroup(groups).iterator().next());
 		app.goTo().returnToHomePage();
 		assertThat(app.contact().count(), equalTo(before.size() + 1));
 		Contacts after = app.db().contacts();
 		assertThat(after,
 		        equalTo(before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
-		
+		verifyGroupListUI();
 	}
 }
