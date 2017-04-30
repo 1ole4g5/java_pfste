@@ -77,7 +77,10 @@ public class ContactData {
 	private String allEMails;
 	
 	@Transient
-	private String allDetails;
+	private String allDataDetailsForm;
+	
+	@Transient
+	private String allDataEditForm;
 	
 	@Transient
 //	@Column(name = "photo")
@@ -100,14 +103,20 @@ public class ContactData {
 	@JoinTable(name = "address_in_groups", 
 		joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
 	private Set<GroupData> groups = new HashSet<GroupData>();
-	
+
+
+	public ContactData withAllDataEditForm(String allDataEditForm) {
+		this.allDataEditForm = allDataEditForm;
+		return this;
+	}
+
 	public ContactData withDomainId(int domain_id) {
 		this.domain_id = domain_id;
 		return this;
 	}
 
-	public ContactData withAllDetails(String allDetails) {
-		this.allDetails = allDetails;
+	public ContactData withAllDataDetailsForm(String allDataDetailsForm) {
+		this.allDataDetailsForm = allDataDetailsForm;
 		return this;
 	}
 
@@ -228,8 +237,12 @@ public class ContactData {
 		return allEMails;
 	}
 
-	public String getAllDetails() {
-		return allDetails;
+	public String getAllDataDetailsForm() {
+		return allDataDetailsForm;
+	}	
+
+	public String getAllDataEditForm() {
+		return allDataEditForm;
 	}
 	
 	public int getDomain_id() {
@@ -242,7 +255,8 @@ public class ContactData {
 
 	@Override
 	public String toString() {
-		return "ContactData [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + "]";
+		return "ContactData [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", address=" + address
+		        + ", homePhone=" + homePhone + ", mobilePhone=" + mobilePhone + ", workPhone=" + workPhone + "]";
 	}
 
 	@Override
@@ -250,11 +264,12 @@ public class ContactData {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
-		result = prime * result + domain_id;
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result + ((homePhone == null) ? 0 : homePhone.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((mobilePhone == null) ? 0 : mobilePhone.hashCode());
+		result = prime * result + ((workPhone == null) ? 0 : workPhone.hashCode());
 		return result;
 	}
 
@@ -272,12 +287,15 @@ public class ContactData {
 				return false;
 		} else if (!address.equals(other.address))
 			return false;
-		if (domain_id != other.domain_id)
-			return false;
 		if (firstName == null) {
 			if (other.firstName != null)
 				return false;
 		} else if (!firstName.equals(other.firstName))
+			return false;
+		if (homePhone == null) {
+			if (other.homePhone != null)
+				return false;
+		} else if (!homePhone.equals(other.homePhone))
 			return false;
 		if (id != other.id)
 			return false;
@@ -290,6 +308,11 @@ public class ContactData {
 			if (other.mobilePhone != null)
 				return false;
 		} else if (!mobilePhone.equals(other.mobilePhone))
+			return false;
+		if (workPhone == null) {
+			if (other.workPhone != null)
+				return false;
+		} else if (!workPhone.equals(other.workPhone))
 			return false;
 		return true;
 	}

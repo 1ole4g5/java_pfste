@@ -125,11 +125,12 @@ public class ContactHelper extends HelperBase {
 			String allPhones = cells.get(5).getText();
 			String allEMails = cells.get(4).getText();
 			String address = cells.get(3).getText();
-			String allDetails = firstName + "\n" + lastName + "\n" + address + allPhones;
+			//String allDetails = firstName + "\n" + lastName + "\n" + address + allPhones;
 			contactCache.add(new ContactData().withId(id).withFirstName(firstName).withLastName(lastName)
-			        .withAddress(address).withAllPhones(allPhones).withAllEMails(allEMails).withAllDetails(allDetails));
+			        .withAddress(address).withAllPhones(allPhones).withAllEMails(allEMails));
+//			        .withAllDetails(allDetails));
 		}
-		return new Contacts(contactCache);
+		return new Contacts(contactCache); // zagruzka s Glavnoi stranici
 	}
 
 	public ContactData infoFromEditForm(ContactData contact) {
@@ -143,10 +144,19 @@ public class ContactHelper extends HelperBase {
 		String firstEMail = wd.findElement(By.name("email")).getAttribute("value");
 		String secondEMail = wd.findElement(By.name("email2")).getAttribute("value");
 		String thirdEMail = wd.findElement(By.name("email3")).getAttribute("value");
+		String allDataEditForm;
+		
+		if (home.equals("") || mobile.equals("") || work.equals("")) {
+			allDataEditForm = firstName + lastName + address + home + mobile + work;
+			
+		} else {
+			allDataEditForm = firstName + lastName + address + "H:" + home + "M:" + mobile + "W:" + work;
+		}
+		
 		wd.navigate().back();
 		return new ContactData().withId(contact.getId()).withFirstName(firstName).withLastName(lastName)
 		        .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work).withAddress(address)
-		        .withFirstEMail(firstEMail).withSecondEMail(secondEMail).withThirdEMail(thirdEMail);
+		        .withFirstEMail(firstEMail).withSecondEMail(secondEMail).withThirdEMail(thirdEMail).withAllDataEditForm(allDataEditForm);
 	}
 
 	private void initContactModificationById(int id) {
@@ -165,8 +175,8 @@ public class ContactHelper extends HelperBase {
 
 	public ContactData infoFromDetailsForm(ContactData contact) {
 		initContactModificationDetailsById(contact.getId());
-		String allDetails = wd.findElement(By.cssSelector("#content")).getText();
+		String allDataDetailForm = wd.findElement(By.cssSelector("#content")).getText();
 		wd.navigate().back();
-		return new ContactData().withId(contact.getId()).withAllDetails(allDetails);
+		return new ContactData().withId(contact.getId()).withAllDataDetailsForm(allDataDetailForm);
 	}
 }

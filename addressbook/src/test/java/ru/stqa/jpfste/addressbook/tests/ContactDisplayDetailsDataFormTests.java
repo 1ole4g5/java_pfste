@@ -25,17 +25,18 @@ public class ContactDisplayDetailsDataFormTests extends TestBase {
 	public void testContactDetails() {
 		app.goTo().returnToHomePage();
 		ContactData contact = app.contact().all().iterator().next();
-		ContactData contactInfoFromDetailsForm = app.contact().infoFromDetailsForm(contact);
-		assertThat(cleaned(contact.getAllDetails()), equalTo(mergeDetails(contactInfoFromDetailsForm)));
+		ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
+		ContactData contactInfoFromDetailsForm = app.contact().infoFromDetailsForm(contact);		
+		assertThat(cleaned(contactInfoFromEditForm.getAllDataEditForm()), equalTo(mergeDetails(contactInfoFromDetailsForm)));
 	}
 
 	private String mergeDetails(ContactData contact) {
-		return Arrays.asList(contact.getAllDetails()).stream().filter((s) -> !(s == null || s.equals("")))
-		        .map(ContactDisplayDetailsDataFormTests::cleaned).collect(Collectors.joining("\n"));
+		return Arrays.asList(contact.getAllDataDetailsForm()).stream().filter((s) -> !(s == null || s.equals("")))
+		        .map(ContactDisplayDetailsDataFormTests::cleaned)
+		        .collect(Collectors.joining("\n"));
 	}
 
 	public static String cleaned(String data) {
-		return data.replaceAll("\\s", "").replaceAll("[-()]", "").replaceAll("H:", "").replaceAll("M:", "")
-		        .replaceAll("W:", "");
+		return data.replaceAll("\\s", "").replaceAll("[-()]", "");
 	}
 }
