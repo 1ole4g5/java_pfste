@@ -104,7 +104,6 @@ public class ContactData {
 		joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
 	private Set<GroupData> groups = new HashSet<GroupData>();
 
-
 	public ContactData withAllDataEditForm(String allDataEditForm) {
 		this.allDataEditForm = allDataEditForm;
 		return this;
@@ -263,13 +262,9 @@ public class ContactData {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + ((homePhone == null) ? 0 : homePhone.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result + ((mobilePhone == null) ? 0 : mobilePhone.hashCode());
-		result = prime * result + ((workPhone == null) ? 0 : workPhone.hashCode());
 		return result;
 	}
 
@@ -282,20 +277,10 @@ public class ContactData {
 		if (getClass() != obj.getClass())
 			return false;
 		ContactData other = (ContactData) obj;
-		if (address == null) {
-			if (other.address != null)
-				return false;
-		} else if (!address.equals(other.address))
-			return false;
 		if (firstName == null) {
 			if (other.firstName != null)
 				return false;
 		} else if (!firstName.equals(other.firstName))
-			return false;
-		if (homePhone == null) {
-			if (other.homePhone != null)
-				return false;
-		} else if (!homePhone.equals(other.homePhone))
 			return false;
 		if (id != other.id)
 			return false;
@@ -304,22 +289,11 @@ public class ContactData {
 				return false;
 		} else if (!lastName.equals(other.lastName))
 			return false;
-		if (mobilePhone == null) {
-			if (other.mobilePhone != null)
-				return false;
-		} else if (!mobilePhone.equals(other.mobilePhone))
-			return false;
-		if (workPhone == null) {
-			if (other.workPhone != null)
-				return false;
-		} else if (!workPhone.equals(other.workPhone))
-			return false;
 		return true;
 	}
 	
 	public ContactData inGroup(GroupData group) {
 		groups.add(group);
-		return this;
-		
+		return this;		
 	}
 }

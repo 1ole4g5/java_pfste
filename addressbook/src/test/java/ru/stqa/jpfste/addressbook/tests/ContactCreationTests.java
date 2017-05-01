@@ -86,18 +86,41 @@ public class ContactCreationTests extends TestBase {
 		}
 	}
 
-	@Test(dataProvider = "validContactsFromJson")
+	@Test(dataProvider = "validContactsFromJson", enabled = false)
 	public void testContactCreation(ContactData contact) {
-		// Contacts before = app.db().contacts();
-		Contacts before = app.contact().all();
-		Groups groups = app.db().groups();
-		app.contact().goToAddNewContactPage();
-		// app.contact().create(contact.inGroup(groups).iterator().next());
+		Contacts before = app.db().contacts();	
+//		Groups groups = app.db().groups();		
+		app.contact().create(contact);		
+		
+//		app.contact().create(
+//		        new ContactData().withFirstName("First name").withLastName("Last name").withAddress("address")
+//		        .inGroup(groups.iterator().next()));
+		
 		app.goTo().returnToHomePage();
 		assertThat(app.contact().count(), equalTo(before.size() + 1));
 		Contacts after = app.db().contacts();
 		assertThat(after,
 		        equalTo(before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
-		verifyGroupListUI();
+		verifyContactListUI();
+	}
+	
+	@Test(dataProvider = "validContactsFromJson")
+	public void testContactCreationAddToGroup(ContactData contact) {
+		Contacts before = app.db().contacts();
+		Groups groups = app.db().groups();				
+		app.contact().create(
+		        new ContactData().withFirstName("First name").withLastName("Last name").withAddress("address")
+		        .inGroup(groups.iterator().next()));
+		
+		app.goTo().returnToHomePage();
+		assertThat(app.contact().count(), equalTo(before.size() + 1));
+		Contacts after = app.db().contacts();
+//		assertThat(after,
+//		        equalTo(before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
+		assertThat(before, equalTo(after.stream()
+				.map((c) -> new ContactData().withId(c.getId()).withFirstName(c.getFirstName()))
+				.collect(Collectors.toSet())));		
+		
+		verifyContactListUI();
 	}
 }

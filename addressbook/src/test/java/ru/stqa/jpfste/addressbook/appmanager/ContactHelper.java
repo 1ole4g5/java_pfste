@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import ru.stqa.jpfste.addressbook.model.ContactData;
 import ru.stqa.jpfste.addressbook.model.Contacts;
+import ru.stqa.jpfste.addressbook.model.Groups;
 
 public class ContactHelper extends HelperBase {
 
@@ -34,26 +35,11 @@ public class ContactHelper extends HelperBase {
 				new Select(wd.findElement(By.name("new_group")))
 				        .selectByVisibleText(contactData.getGroups().iterator().next().getName());
 			}
-
 		} else {
 			Assert.assertFalse(isElementPresent(By.name("new_group")));
 		}
 	}
 	
-	public void fillAddNewContactForm(ContactData contactData) {
-		type(By.name("firstname"), contactData.getFirstName());
-		type(By.name("lastname"), contactData.getLastName());
-		type(By.name("nickname"), contactData.getNickName());
-		type(By.name("address"), contactData.getAddress());
-		type(By.name("email"), contactData.getFirstEMail());
-		type(By.name("email2"), contactData.getSecondEMail());
-		type(By.name("email3"), contactData.getThirdEMail());
-		type(By.name("home"), contactData.getHomePhone());
-		type(By.name("mobile"), contactData.getMobilePhone());
-		type(By.name("work"), contactData.getWorkPhone());
-		// attach(By.name("photo"), contactData.getPhoto());
-	}
-
 	public void submitAddNewContactForm() {
 		click(By.xpath("//div[@id='content']/form/input[21]"));
 	}
@@ -88,7 +74,7 @@ public class ContactHelper extends HelperBase {
 
 	public void create(ContactData contactData) {
 		goToAddNewContactPage();
-		fillAddNewContactForm(contactData);
+		fillAddNewContactForm(contactData, true);
 		submitAddNewContactForm();
 		contactCache = null;
 	}
@@ -124,13 +110,13 @@ public class ContactHelper extends HelperBase {
 			String lastName = cells.get(1).getText();
 			String allPhones = cells.get(5).getText();
 			String allEMails = cells.get(4).getText();
-			String address = cells.get(3).getText();
-			//String allDetails = firstName + "\n" + lastName + "\n" + address + allPhones;
+			String address = cells.get(3).getText();			
+			// String allDetails = firstName + "\n" + lastName + "\n" + address + allPhones;
 			contactCache.add(new ContactData().withId(id).withFirstName(firstName).withLastName(lastName)
 			        .withAddress(address).withAllPhones(allPhones).withAllEMails(allEMails));
-//			        .withAllDetails(allDetails));
+			// .withAllDetails(allDetails));
 		}
-		return new Contacts(contactCache); // zagruzka s Glavnoi stranici
+		return new Contacts(contactCache);
 	}
 
 	public ContactData infoFromEditForm(ContactData contact) {
