@@ -255,13 +255,14 @@ public class ContactData {
 	@Override
 	public String toString() {
 		return "ContactData [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", address=" + address
-		        + ", homePhone=" + homePhone + ", mobilePhone=" + mobilePhone + ", workPhone=" + workPhone + "]";
+		        + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
@@ -277,6 +278,11 @@ public class ContactData {
 		if (getClass() != obj.getClass())
 			return false;
 		ContactData other = (ContactData) obj;
+		if (address == null) {
+			if (other.address != null)
+				return false;
+		} else if (!address.equals(other.address))
+			return false;
 		if (firstName == null) {
 			if (other.firstName != null)
 				return false;

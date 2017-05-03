@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import ru.stqa.jpfste.addressbook.model.ContactData;
 import ru.stqa.jpfste.addressbook.model.Contacts;
-import ru.stqa.jpfste.addressbook.model.Groups;
+import ru.stqa.jpfste.addressbook.model.GroupData;
 
 public class ContactHelper extends HelperBase {
 
@@ -59,6 +59,10 @@ public class ContactHelper extends HelperBase {
 	public void selectContactById(int id) {
 		click(By.cssSelector("input[value='" + id + "']"));
 	}
+	
+	public void selectContact() {
+		click(By.name("selected[]"));
+	}
 
 	public void updateItem() {
 		click(By.name("update"));
@@ -92,6 +96,23 @@ public class ContactHelper extends HelperBase {
 		deletionContact();
 		acceptAlert();
 		contactCache = null;
+	}
+	
+	public void deleteGroup() {
+		selectGroupFilter();		
+		// selectContactById(group.getId());
+		selectContact();
+		removeFromGroup();
+		contactCache = null;
+	}
+
+	public void removeFromGroup() {
+		click(By.name("remove"));		
+	}
+
+	public void selectGroupFilter() {
+		new Select(wd.findElement(By.name("group")))
+        .selectByVisibleText("new group"); // (contactData.getGroups().iterator().next().getName());		
 	}
 
 	private Contacts contactCache = null;

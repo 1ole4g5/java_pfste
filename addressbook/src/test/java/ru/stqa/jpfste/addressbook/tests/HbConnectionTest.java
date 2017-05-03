@@ -34,13 +34,13 @@ public class HbConnectionTest {
 		}
 	}
 	
-	@Test(enabled = false)
+	@Test
 	public void testHbConnectionGroups() {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		List<GroupData> result = session.createQuery("from GroupData").list();
 		for (GroupData group : result) {
-		    System.out.println(group);
+		    System.out.println("group: " + group);
 		}
 		session.getTransaction().commit();
 		session.close();
@@ -54,8 +54,8 @@ public class HbConnectionTest {
 		session.getTransaction().commit();
 		session.close();
 		for (ContactData contact : result) {
-		    System.out.println(contact);
-		    System.out.println(contact.getGroups());
+		    System.out.println("contact: " + contact);
+		    System.out.println("contact in group: " + contact.getGroups());
 		}
 	}
 }

@@ -24,7 +24,6 @@ import com.thoughtworks.xstream.io.xml.StaxDriver;
 import ru.stqa.jpfste.addressbook.model.ContactData;
 import ru.stqa.jpfste.addressbook.model.Contacts;
 import ru.stqa.jpfste.addressbook.model.GroupData;
-import ru.stqa.jpfste.addressbook.model.Groups;
 
 public class ContactCreationTests extends TestBase {
 
@@ -86,10 +85,9 @@ public class ContactCreationTests extends TestBase {
 		}
 	}
 
-	@Test(dataProvider = "validContactsFromJson", enabled = false)
+	@Test(dataProvider = "validContactsFromJson")
 	public void testContactCreation(ContactData contact) {
-		Contacts before = app.db().contacts();	
-//		Groups groups = app.db().groups();		
+		Contacts before = app.db().contacts();		
 		app.contact().create(contact);		
 		
 //		app.contact().create(
@@ -101,26 +99,6 @@ public class ContactCreationTests extends TestBase {
 		Contacts after = app.db().contacts();
 		assertThat(after,
 		        equalTo(before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
-		verifyContactListUI();
-	}
-	
-	@Test(dataProvider = "validContactsFromJson")
-	public void testContactCreationAddToGroup(ContactData contact) {
-		Contacts before = app.db().contacts();
-		Groups groups = app.db().groups();				
-		app.contact().create(
-		        new ContactData().withFirstName("First name").withLastName("Last name").withAddress("address")
-		        .inGroup(groups.iterator().next()));
-		
-		app.goTo().returnToHomePage();
-		assertThat(app.contact().count(), equalTo(before.size() + 1));
-		Contacts after = app.db().contacts();
-//		assertThat(after,
-//		        equalTo(before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
-		assertThat(before, equalTo(after.stream()
-				.map((c) -> new ContactData().withId(c.getId()).withFirstName(c.getFirstName()))
-				.collect(Collectors.toSet())));		
-		
 		verifyContactListUI();
 	}
 }
