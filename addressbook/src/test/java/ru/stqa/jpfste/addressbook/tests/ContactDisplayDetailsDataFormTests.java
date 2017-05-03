@@ -26,12 +26,13 @@ public class ContactDisplayDetailsDataFormTests extends TestBase {
 		app.goTo().returnToHomePage();
 		ContactData contact = app.contact().all().iterator().next();
 		ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
-		ContactData contactInfoFromDetailsForm = app.contact().infoFromDetailsForm(contact);		
+		ContactData contactInfoFromDetailsForm = app.contact().infoFromDetailsForm(contact);	
 		assertThat(cleaned(contactInfoFromEditForm.getAllDataEditForm()), equalTo(mergeDetails(contactInfoFromDetailsForm)));
 	}
-
+	
 	private String mergeDetails(ContactData contact) {
-		return Arrays.asList(contact.getAllDataDetailsForm()).stream().filter((s) -> !(s == null || s.equals("")))
+		return Arrays.asList(contact.getAllDataDetailsForm())
+				.stream().filter((s) -> !(s == null || s.equals("")))
 		        .map(ContactDisplayDetailsDataFormTests::cleaned)
 		        .collect(Collectors.joining("\n"));
 	}

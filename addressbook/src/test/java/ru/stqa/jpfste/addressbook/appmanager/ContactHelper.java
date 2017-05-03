@@ -151,19 +151,23 @@ public class ContactHelper extends HelperBase {
 		String firstEMail = wd.findElement(By.name("email")).getAttribute("value");
 		String secondEMail = wd.findElement(By.name("email2")).getAttribute("value");
 		String thirdEMail = wd.findElement(By.name("email3")).getAttribute("value");
-		String allDataEditForm;
 		
-		if (home.equals("") || mobile.equals("") || work.equals("")) {
-			allDataEditForm = firstName + lastName + address + home + mobile + work;
-			
-		} else {
-			allDataEditForm = firstName + lastName + address + "H:" + home + "M:" + mobile + "W:" + work;
+		if (! home.equals("")) {
+			home = "H: " + home;
+		}
+		if (! mobile.equals("")) {
+			mobile = "M: " + mobile;
+		}
+		if (! work.equals("")) {
+			work = "W: " + work;
 		}
 		
+		String allDataEditForm = firstName + lastName + address + home + mobile + work;		
 		wd.navigate().back();
 		return new ContactData().withId(contact.getId()).withFirstName(firstName).withLastName(lastName)
 		        .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work).withAddress(address)
-		        .withFirstEMail(firstEMail).withSecondEMail(secondEMail).withThirdEMail(thirdEMail).withAllDataEditForm(allDataEditForm);
+		        .withFirstEMail(firstEMail).withSecondEMail(secondEMail).withThirdEMail(thirdEMail)
+		        .withAllDataEditForm(allDataEditForm);
 	}
 
 	private void initContactModificationById(int id) {

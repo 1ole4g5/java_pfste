@@ -17,7 +17,6 @@ import org.openqa.selenium.remote.BrowserType;
 public class ApplicationManager {
 	private final Properties properties;
 	WebDriver wd;
-	WebDriver wait_;
 
 	public GroupHelper groupHelper;
 	public ContactHelper contactHelper;
