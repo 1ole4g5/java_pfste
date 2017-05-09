@@ -9,7 +9,6 @@ import org.openqa.selenium.support.ui.Select;
 
 import ru.stqa.jpfste.addressbook.model.ContactData;
 import ru.stqa.jpfste.addressbook.model.Contacts;
-import ru.stqa.jpfste.addressbook.model.GroupData;
 
 public class ContactHelper extends HelperBase {
 
