@@ -8,4 +8,9 @@ public class MailMessage {
 		this.to = to;
 		this.text = text;
 	}
+
+	@Override
+	public String toString() {
+		return "MailMessage [to=" + to + ", text=" + text + "]";
+	}
 }

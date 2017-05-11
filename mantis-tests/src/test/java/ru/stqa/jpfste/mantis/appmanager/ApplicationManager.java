@@ -14,6 +14,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.BrowserType;
 
+
 public class ApplicationManager {
 
 	private final Properties properties;
@@ -22,6 +23,10 @@ public class ApplicationManager {
 	private RegistrationHelper registrationHelper;
 	private FtpHelper ftp;
 	private MailHelper mailHelper;
+	private LoginHelper loginHelper;
+	private NavigationHelper navigationHelper;
+	private DbHelper dbHelper;
+	private UserHelper userHelper;
 
 	public ApplicationManager(String browser) {
 		this.browser = browser;
@@ -69,7 +74,8 @@ public class ApplicationManager {
 			} else if (browser.equals(BrowserType.CHROME)) {
 				wd = new ChromeDriver();
 			}
-			wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+			wd.manage().window().maximize();
+			wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 			wd.get(properties.getProperty("web.baseUrl"));
 		}
 		return wd;
@@ -80,5 +86,33 @@ public class ApplicationManager {
 			mailHelper = new MailHelper(this);
 		}
 		return mailHelper;
+	}
+	
+	public LoginHelper loginHelper() {
+		if (loginHelper == null) {
+			loginHelper = new LoginHelper(this);
+		}
+		return loginHelper;
+	}
+	
+	public NavigationHelper goTo() {
+		if (navigationHelper == null) {
+			navigationHelper = new NavigationHelper(this);
+		}
+		return navigationHelper;
+	}
+
+	public DbHelper db() {
+		if (dbHelper == null) {
+			dbHelper = new DbHelper();
+		}
+		return dbHelper;
+	}
+
+	public UserHelper user() {
+		if (userHelper == null) {
+			userHelper = new UserHelper(this);
+		}
+		return userHelper;
 	}
 }
