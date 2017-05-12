@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.lang.reflect.Method;
+import java.net.MalformedURLException;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -50,7 +51,7 @@ public class TestBase {
 		
 	}
 	
-	public void verifyGroupListUI() {
+	public void verifyGroupListUI() throws MalformedURLException {
 		if (Boolean.getBoolean("verifyUI")) {
 		Groups dbGroups = app.db().groups();
 		Groups uiGroups = app.group().all();
@@ -59,7 +60,7 @@ public class TestBase {
 				.collect(Collectors.toSet())));		
 	}}
 	
-	public void verifyContactListUI() {
+	public void verifyContactListUI() throws MalformedURLException {
 		if (Boolean.getBoolean("verifyUI")) {
 		Contacts dbContacts = app.db().contacts();
 		Contacts uiContacts = app.contact().all();

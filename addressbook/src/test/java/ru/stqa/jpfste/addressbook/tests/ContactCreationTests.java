@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -78,7 +79,7 @@ public class ContactCreationTests extends TestBase {
 	}
 	
 	@BeforeMethod
-	public void ensurePreconditions() {
+	public void ensurePreconditions() throws MalformedURLException {
 		if (app.db().groups().size() == 0) {
 			app.group().create(new GroupData().withName("new group"));
 			app.goTo().returnToHomePage();
@@ -86,7 +87,7 @@ public class ContactCreationTests extends TestBase {
 	}
 
 	@Test(dataProvider = "validContactsFromJson")
-	public void testContactCreation(ContactData contact) {
+	public void testContactCreation(ContactData contact) throws MalformedURLException {
 		Contacts before = app.db().contacts();		
 		app.contact().create(contact);		
 		

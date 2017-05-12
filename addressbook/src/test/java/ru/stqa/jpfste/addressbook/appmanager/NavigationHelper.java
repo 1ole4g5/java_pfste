@@ -1,10 +1,12 @@
 package ru.stqa.jpfste.addressbook.appmanager;
 
+import java.net.MalformedURLException;
+
 import org.openqa.selenium.By;
 
 public class NavigationHelper extends HelperBase {
 
-	public NavigationHelper(ApplicationManager app) {
+	public NavigationHelper(ApplicationManager app) throws MalformedURLException {
 		super(app);
 	}
 

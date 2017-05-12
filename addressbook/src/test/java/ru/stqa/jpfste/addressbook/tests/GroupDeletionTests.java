@@ -3,6 +3,8 @@ package ru.stqa.jpfste.addressbook.tests;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import java.net.MalformedURLException;
+
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -12,7 +14,7 @@ import ru.stqa.jpfste.addressbook.model.Groups;
 public class GroupDeletionTests extends TestBase {
 
 	@BeforeMethod
-	public void ensurePreconditions() {
+	public void ensurePreconditions() throws MalformedURLException {
 		if (app.db().groups().size() == 0) {
 			app.group().create(new GroupData().withName("new group"));
 			app.goTo().returnToHomePage();
@@ -20,7 +22,7 @@ public class GroupDeletionTests extends TestBase {
 	}
 
 	@Test
-	public void testGroupDeletion() {
+	public void testGroupDeletion() throws MalformedURLException {
 		Groups before = app.db().groups();
 		GroupData deletedGroup = before.iterator().next();
 		app.group().delete(deletedGroup);

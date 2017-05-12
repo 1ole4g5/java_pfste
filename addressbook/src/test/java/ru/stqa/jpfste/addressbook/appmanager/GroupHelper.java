@@ -1,5 +1,6 @@
 package ru.stqa.jpfste.addressbook.appmanager;
 
+import java.net.MalformedURLException;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -10,7 +11,7 @@ import ru.stqa.jpfste.addressbook.model.Groups;
 
 public class GroupHelper extends HelperBase {
 
-	public GroupHelper(ApplicationManager app) {
+	public GroupHelper(ApplicationManager app) throws MalformedURLException {
 		super(app);
 	}
 

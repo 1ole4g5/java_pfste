@@ -9,7 +9,6 @@ import java.net.URL;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxBinary;
@@ -78,35 +77,35 @@ public class ApplicationManager {
 		return dbHelper;
 	}
 	
-	public GroupHelper group() {
+	public GroupHelper group() throws MalformedURLException {
 		if (groupHelper == null) {
 			groupHelper = new GroupHelper(this);
 		}
 		return groupHelper;
 	}
 
-	public ContactHelper contact() {
+	public ContactHelper contact() throws MalformedURLException {
 		if (contactHelper == null) {
 			contactHelper = new ContactHelper(this);
 		}
 		return contactHelper;
 	}
 
-	public HelperBase getHelperBase() {
+	public HelperBase getHelperBase() throws MalformedURLException {
 		if (helperBase == null) {
 			helperBase = new HelperBase(this);
 		}
 		return helperBase;
 	}
 
-	public SessionHelper getSessionHelper() {
+	public SessionHelper getSessionHelper() throws MalformedURLException {
 		if (sessionHelper == null) {
 			sessionHelper = new SessionHelper(this);
 		}
 		return sessionHelper;
 	}
 
-	public NavigationHelper goTo() {
+	public NavigationHelper goTo() throws MalformedURLException {
 		if (navigationHelper == null) {
 			navigationHelper = new NavigationHelper(this);
 		}

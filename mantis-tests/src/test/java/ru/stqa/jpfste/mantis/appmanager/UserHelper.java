@@ -1,6 +1,5 @@
 package ru.stqa.jpfste.mantis.appmanager;
 
-import org.apache.http.client.methods.HttpGet;
 import org.openqa.selenium.By;
 
 import ru.stqa.jpfste.mantis.model.UserData;

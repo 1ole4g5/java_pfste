@@ -1,5 +1,6 @@
 package ru.stqa.jpfste.addressbook.appmanager;
 
+import java.net.MalformedURLException;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -12,7 +13,7 @@ import ru.stqa.jpfste.addressbook.model.Contacts;
 
 public class ContactHelper extends HelperBase {
 
-	public ContactHelper(ApplicationManager app) {
+	public ContactHelper(ApplicationManager app) throws MalformedURLException {
 		super(app);
 	}
 

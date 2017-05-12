@@ -1,10 +1,12 @@
 package ru.stqa.jpfste.addressbook.appmanager;
 
+import java.net.MalformedURLException;
+
 import org.openqa.selenium.By;
 
 public class SessionHelper extends HelperBase {
 
-	public SessionHelper(ApplicationManager app) {
+	public SessionHelper(ApplicationManager app) throws MalformedURLException {
 		super(app);
 	}
 

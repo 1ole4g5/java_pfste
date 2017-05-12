@@ -3,6 +3,7 @@ package ru.stqa.jpfste.addressbook.tests;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import java.net.MalformedURLException;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -14,7 +15,7 @@ import ru.stqa.jpfste.addressbook.model.ContactData;
 public class ContactDisplayDetailsDataFormTests extends TestBase {
 
 	@BeforeMethod
-	public void ensurePreconditions() {
+	public void ensurePreconditions() throws MalformedURLException {
 		if (app.contact().all().size() == 0) {
 			app.contact().create(new ContactData().withFirstName("FirstName").withLastName("LastName")
 			        .withAddress("789-)01").withHomePhone("+7(111)").withMobilePhone("2-2-2").withWorkPhone("3 3 3"));
@@ -22,7 +23,7 @@ public class ContactDisplayDetailsDataFormTests extends TestBase {
 	}
 
 	@Test
-	public void testContactDetails() {
+	public void testContactDetails() throws MalformedURLException {
 		app.goTo().returnToHomePage();
 		ContactData contact = app.contact().all().iterator().next();
 		ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);

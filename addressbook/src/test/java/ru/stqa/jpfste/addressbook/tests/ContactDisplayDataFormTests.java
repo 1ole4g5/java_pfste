@@ -3,6 +3,7 @@ package ru.stqa.jpfste.addressbook.tests;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import java.net.MalformedURLException;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -14,7 +15,7 @@ import ru.stqa.jpfste.addressbook.model.ContactData;
 public class ContactDisplayDataFormTests extends TestBase {
 
 	@BeforeMethod
-	public void ensurePreconditions() {
+	public void ensurePreconditions() throws MalformedURLException {
 		if (app.contact().all().size() == 0) {
 			app.contact().create(new ContactData().withFirstName("First name").withLastName("Last name")
 			        .withAddress("789-)01").withFirstEMail("test@test.com").withSecondEMail("1@1").withThirdEMail("1+1")
@@ -23,7 +24,7 @@ public class ContactDisplayDataFormTests extends TestBase {
 	}
 
 	@Test
-	public void testContactPhones() {
+	public void testContactPhones() throws MalformedURLException {
 		app.goTo().returnToHomePage();
 		ContactData contact = app.contact().all().iterator().next();
 		ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
@@ -31,7 +32,7 @@ public class ContactDisplayDataFormTests extends TestBase {
 	}
 
 	@Test
-	public void testContactAddress() {
+	public void testContactAddress() throws MalformedURLException {
 		app.goTo().returnToHomePage();
 		ContactData contact = app.contact().all().iterator().next();
 		ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
@@ -39,7 +40,7 @@ public class ContactDisplayDataFormTests extends TestBase {
 	}
 
 	@Test
-	public void testContactEMails() {
+	public void testContactEMails() throws MalformedURLException {
 		app.goTo().returnToHomePage();
 		ContactData contact = app.contact().all().iterator().next();
 		ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);

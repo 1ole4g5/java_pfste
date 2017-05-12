@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -44,7 +45,7 @@ public class ContactInGroupTests extends TestBase {
 	}
 	
 	@BeforeMethod
-	public void ensurePreconditions() {
+	public void ensurePreconditions() throws MalformedURLException {
 		app.contact().selectGroupFilter();
 		
 		if (app.contact().all().size() == 0) {
@@ -68,7 +69,7 @@ public class ContactInGroupTests extends TestBase {
 	}
 	
 	@Test(dataProvider = "validContactsFromJson", enabled = false)
-	public void testContactAddToGroup(ContactData contact) {
+	public void testContactAddToGroup(ContactData contact) throws MalformedURLException {
 		app.contact().selectGroupFilter();
 		app.contact().all();		
 		Contacts before = app.db().contacts();
@@ -83,7 +84,7 @@ public class ContactInGroupTests extends TestBase {
 	}
 	
 	@Test(dataProvider = "validContactsFromJson")
-	public void testContactDeleteFromGroup(ContactData contact) {
+	public void testContactDeleteFromGroup(ContactData contact) throws MalformedURLException {
 
 		Groups beforeInGroup = app.db().groupInContact();
 		

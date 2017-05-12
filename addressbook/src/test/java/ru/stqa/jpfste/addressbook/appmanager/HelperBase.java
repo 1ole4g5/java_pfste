@@ -1,6 +1,7 @@
 package ru.stqa.jpfste.addressbook.appmanager;
 
 import java.io.File;
+import java.net.MalformedURLException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
@@ -12,7 +13,7 @@ public class HelperBase {
 	protected WebDriver wd;
 	protected ApplicationManager app;
 
-	public HelperBase(ApplicationManager app) {
+	public HelperBase(ApplicationManager app) throws MalformedURLException {
 		this.app = app;
 		this.wd = app.getDriver();
 	}

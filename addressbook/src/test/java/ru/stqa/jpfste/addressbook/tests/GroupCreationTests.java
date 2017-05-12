@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -75,7 +76,7 @@ public class GroupCreationTests extends TestBase {
 	}
 
 	@Test(dataProvider = "validGroupsFromJson")
-	public void testGroupCreation(GroupData group) {
+	public void testGroupCreation(GroupData group) throws MalformedURLException {
 		app.group().groupPage();
 		Groups before = app.db().groups();
 		app.group().create(group);
@@ -87,7 +88,7 @@ public class GroupCreationTests extends TestBase {
 	}
 
 	@Test(dataProvider = "inValidGroups", enabled = false)
-	public void testBadGroupCreation(GroupData group) {
+	public void testBadGroupCreation(GroupData group) throws MalformedURLException {
 		app.group().groupPage();
 		Groups before = app.db().groups();
 		app.group().create(group);
