@@ -13,9 +13,9 @@ public class HelperBase {
 	protected WebDriver wd;
 	protected ApplicationManager app;
 
-	public HelperBase(ApplicationManager app) throws MalformedURLException {
-		this.app = app;
-		this.wd = app.getDriver();
+	public HelperBase(WebDriver wd) throws MalformedURLException {
+		//this.app = app;
+		this.wd = wd;
 	}
 
 	protected void click(By locator) {

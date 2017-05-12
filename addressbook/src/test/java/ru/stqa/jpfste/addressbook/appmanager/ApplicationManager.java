@@ -37,6 +37,28 @@ public class ApplicationManager {
 	public void init() throws FileNotFoundException, IOException {
 		String target = System.getProperty("target", "local");
 		properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+		if ("".equals(properties.getProperty("selenium.server"))) {
+			if (browser.equals(BrowserType.FIREFOX)) {
+				FirefoxBinary binary = new FirefoxBinary(new File(properties.getProperty("pathToFirefoxBrowser")));
+				wd = new FirefoxDriver(binary, new FirefoxProfile());
+			} else if (browser.equals(BrowserType.CHROME)) {
+				wd = new ChromeDriver();
+			} else {
+				DesiredCapabilities capabilities = new DesiredCapabilities();
+				capabilities.setBrowserName(browser);
+				wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), capabilities);
+			}
+		}
+		wd.manage().window().maximize();
+		wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+		wd.get(properties.getProperty("web.baseUrl"));
+		groupHelper = new GroupHelper(wd);
+		contactHelper = new ContactHelper(wd);
+		helperBase = new HelperBase(wd);
+		sessionHelper = new SessionHelper(wd);
+		navigationHelper = new NavigationHelper(wd);
+		dbHelper = new DbHelper();
+		getSessionHelper().login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
 	}
 
 	public void stop() {
@@ -44,71 +66,32 @@ public class ApplicationManager {
 			wd.quit();
 		}
 	}
-
-	public WebDriver getDriver() throws MalformedURLException {
-		if (wd == null) {
-			if ("".equals(properties.getProperty("selenium.server"))) {
-				if (browser.equals(BrowserType.FIREFOX)) {
-					FirefoxBinary binary = new FirefoxBinary(new File(properties.getProperty("pathToFirefoxBrowser")));
-					wd = new FirefoxDriver(binary, new FirefoxProfile());
-				} else if (browser.equals(BrowserType.CHROME)) {
-					wd = new ChromeDriver();
-				} else {
-					DesiredCapabilities capabilities = new DesiredCapabilities();
-					capabilities.setBrowserName(browser);
-					wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), capabilities);
-				}
-			}
-			// wd.manage().window().maximize();
-			wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-			wd.get(properties.getProperty("web.baseUrl"));
-		}
-		return wd;
-	}
 	
 	public String getProperty(String key) {
 		return properties.getProperty(key);
 	}
 	
 	public DbHelper db() {
-		if (dbHelper == null) {
-			dbHelper = new DbHelper();
-		}
 		return dbHelper;
 	}
 	
 	public GroupHelper group() throws MalformedURLException {
-		if (groupHelper == null) {
-			groupHelper = new GroupHelper(this);
-		}
 		return groupHelper;
 	}
 
 	public ContactHelper contact() throws MalformedURLException {
-		if (contactHelper == null) {
-			contactHelper = new ContactHelper(this);
-		}
 		return contactHelper;
 	}
 
 	public HelperBase getHelperBase() throws MalformedURLException {
-		if (helperBase == null) {
-			helperBase = new HelperBase(this);
-		}
 		return helperBase;
 	}
 
 	public SessionHelper getSessionHelper() throws MalformedURLException {
-		if (sessionHelper == null) {
-			sessionHelper = new SessionHelper(this);
-		}
 		return sessionHelper;
 	}
 
 	public NavigationHelper goTo() throws MalformedURLException {
-		if (navigationHelper == null) {
-			navigationHelper = new NavigationHelper(this);
-		}
 		return navigationHelper;
 	}
 }

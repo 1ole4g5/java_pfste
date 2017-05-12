@@ -4,6 +4,7 @@ import java.net.MalformedURLException;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
@@ -13,8 +14,8 @@ import ru.stqa.jpfste.addressbook.model.Contacts;
 
 public class ContactHelper extends HelperBase {
 
-	public ContactHelper(ApplicationManager app) throws MalformedURLException {
-		super(app);
+	public ContactHelper(WebDriver wd) throws MalformedURLException {
+		super(wd);
 	}
 
 	public void fillAddNewContactForm(ContactData contactData, boolean creation) {

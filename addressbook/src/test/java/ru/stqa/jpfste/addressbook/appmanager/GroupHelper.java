@@ -4,6 +4,7 @@ import java.net.MalformedURLException;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import ru.stqa.jpfste.addressbook.model.GroupData;
@@ -11,8 +12,8 @@ import ru.stqa.jpfste.addressbook.model.Groups;
 
 public class GroupHelper extends HelperBase {
 
-	public GroupHelper(ApplicationManager app) throws MalformedURLException {
-		super(app);
+	public GroupHelper(WebDriver wd) throws MalformedURLException {
+		super(wd);
 	}
 
 	public void fillGroupForm(GroupData groupData) {
