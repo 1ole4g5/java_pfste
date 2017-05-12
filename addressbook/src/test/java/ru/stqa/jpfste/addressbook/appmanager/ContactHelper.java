@@ -14,8 +14,8 @@ import ru.stqa.jpfste.addressbook.model.Contacts;
 
 public class ContactHelper extends HelperBase {
 
-	public ContactHelper(WebDriver wd) throws MalformedURLException {
-		super(wd);
+	public ContactHelper(ApplicationManager app) {
+		super(app);
 	}
 
 	public void fillAddNewContactForm(ContactData contactData, boolean creation) {

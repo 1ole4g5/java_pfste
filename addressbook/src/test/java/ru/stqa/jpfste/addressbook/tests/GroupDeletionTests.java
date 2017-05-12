@@ -14,7 +14,7 @@ import ru.stqa.jpfste.addressbook.model.Groups;
 public class GroupDeletionTests extends TestBase {
 
 	@BeforeMethod
-	public void ensurePreconditions() throws MalformedURLException {
+	public void ensurePreconditions() {
 		if (app.db().groups().size() == 0) {
 			app.group().create(new GroupData().withName("new group"));
 			app.goTo().returnToHomePage();
@@ -22,7 +22,7 @@ public class GroupDeletionTests extends TestBase {
 	}
 
 	@Test
-	public void testGroupDeletion() throws MalformedURLException {
+	public void testGroupDeletion() {
 		Groups before = app.db().groups();
 		GroupData deletedGroup = before.iterator().next();
 		app.group().delete(deletedGroup);

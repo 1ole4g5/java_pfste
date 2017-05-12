@@ -45,7 +45,7 @@ public class ContactInGroupTests extends TestBase {
 	}
 	
 	@BeforeMethod
-	public void ensurePreconditions() throws MalformedURLException {
+	public void ensurePreconditions() {
 		app.contact().selectGroupFilter();
 		
 		if (app.contact().all().size() == 0) {
@@ -69,7 +69,7 @@ public class ContactInGroupTests extends TestBase {
 	}
 	
 	@Test(dataProvider = "validContactsFromJson", enabled = false)
-	public void testContactAddToGroup(ContactData contact) throws MalformedURLException {
+	public void testContactAddToGroup(ContactData contact) {
 		app.contact().selectGroupFilter();
 		app.contact().all();		
 		Contacts before = app.db().contacts();
@@ -84,7 +84,7 @@ public class ContactInGroupTests extends TestBase {
 	}
 	
 	@Test(dataProvider = "validContactsFromJson")
-	public void testContactDeleteFromGroup(ContactData contact) throws MalformedURLException {
+	public void testContactDeleteFromGroup(ContactData contact) {
 
 		Groups beforeInGroup = app.db().groupInContact();
 		

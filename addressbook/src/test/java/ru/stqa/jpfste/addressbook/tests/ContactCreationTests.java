@@ -79,7 +79,7 @@ public class ContactCreationTests extends TestBase {
 	}
 	
 	@BeforeMethod
-	public void ensurePreconditions() throws MalformedURLException {
+	public void ensurePreconditions() {
 		if (app.db().groups().size() == 0) {
 			app.group().create(new GroupData().withName("new group"));
 			app.goTo().returnToHomePage();
@@ -87,7 +87,7 @@ public class ContactCreationTests extends TestBase {
 	}
 
 	@Test(dataProvider = "validContactsFromJson")
-	public void testContactCreation(ContactData contact) throws MalformedURLException {
+	public void testContactCreation(ContactData contact) {
 		Contacts before = app.db().contacts();		
 		app.contact().create(contact);		
 		

@@ -50,7 +50,7 @@ public class TestBase {
 		
 	}
 	
-	public void verifyGroupListUI() throws MalformedURLException {
+	public void verifyGroupListUI() {
 		if (Boolean.getBoolean("verifyUI")) {
 		Groups dbGroups = app.db().groups();
 		Groups uiGroups = app.group().all();
@@ -59,7 +59,7 @@ public class TestBase {
 				.collect(Collectors.toSet())));		
 	}}
 	
-	public void verifyContactListUI() throws MalformedURLException {
+	public void verifyContactListUI() {
 		if (Boolean.getBoolean("verifyUI")) {
 		Contacts dbContacts = app.db().contacts();
 		Contacts uiContacts = app.contact().all();

@@ -15,7 +15,7 @@ import ru.stqa.jpfste.addressbook.model.ContactData;
 public class ContactDisplayDataFormTests extends TestBase {
 
 	@BeforeMethod
-	public void ensurePreconditions() throws MalformedURLException {
+	public void ensurePreconditions() {
 		if (app.contact().all().size() == 0) {
 			app.contact().create(new ContactData().withFirstName("First name").withLastName("Last name")
 			        .withAddress("789-)01").withFirstEMail("test@test.com").withSecondEMail("1@1").withThirdEMail("1+1")
@@ -24,7 +24,7 @@ public class ContactDisplayDataFormTests extends TestBase {
 	}
 
 	@Test
-	public void testContactPhones() throws MalformedURLException {
+	public void testContactPhones() {
 		app.goTo().returnToHomePage();
 		ContactData contact = app.contact().all().iterator().next();
 		ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
@@ -32,7 +32,7 @@ public class ContactDisplayDataFormTests extends TestBase {
 	}
 
 	@Test
-	public void testContactAddress() throws MalformedURLException {
+	public void testContactAddress() {
 		app.goTo().returnToHomePage();
 		ContactData contact = app.contact().all().iterator().next();
 		ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
@@ -40,7 +40,7 @@ public class ContactDisplayDataFormTests extends TestBase {
 	}
 
 	@Test
-	public void testContactEMails() throws MalformedURLException {
+	public void testContactEMails() {
 		app.goTo().returnToHomePage();
 		ContactData contact = app.contact().all().iterator().next();
 		ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);

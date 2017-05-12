@@ -76,7 +76,7 @@ public class GroupCreationTests extends TestBase {
 	}
 
 	@Test(dataProvider = "validGroupsFromJson")
-	public void testGroupCreation(GroupData group) throws MalformedURLException {
+	public void testGroupCreation(GroupData group) {
 		app.group().groupPage();
 		Groups before = app.db().groups();
 		app.group().create(group);
@@ -88,7 +88,7 @@ public class GroupCreationTests extends TestBase {
 	}
 
 	@Test(dataProvider = "inValidGroups", enabled = false)
-	public void testBadGroupCreation(GroupData group) throws MalformedURLException {
+	public void testBadGroupCreation(GroupData group) {
 		app.group().groupPage();
 		Groups before = app.db().groups();
 		app.group().create(group);

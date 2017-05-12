@@ -12,8 +12,8 @@ import ru.stqa.jpfste.addressbook.model.Groups;
 
 public class GroupHelper extends HelperBase {
 
-	public GroupHelper(WebDriver wd) throws MalformedURLException {
-		super(wd);
+	public GroupHelper(ApplicationManager app) {
+		super(app);
 	}
 
 	public void fillGroupForm(GroupData groupData) {

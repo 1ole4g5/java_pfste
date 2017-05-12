@@ -14,7 +14,7 @@ import ru.stqa.jpfste.addressbook.model.Contacts;
 public class ContactModificationTests extends TestBase {
 
 	@BeforeMethod
-	public void ensurePreconditions() throws MalformedURLException {
+	public void ensurePreconditions() {
 		if (app.db().contacts().size() == 0) {
 			app.contact().create(
 			        new ContactData().withFirstName("First name").withLastName("Last name").withAddress("address")
@@ -23,7 +23,7 @@ public class ContactModificationTests extends TestBase {
 	}
 
 	@Test
-	public void testContactModification() throws MalformedURLException {
+	public void testContactModification() {
 		Contacts before = app.db().contacts();
 		ContactData modifiedContact = before.iterator().next();
 		ContactData contact = new ContactData().withId(modifiedContact.getId()).withFirstName("First name_")

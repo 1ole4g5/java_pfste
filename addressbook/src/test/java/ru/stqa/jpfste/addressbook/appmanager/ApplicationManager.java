@@ -20,7 +20,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class ApplicationManager {
 	private final Properties properties;
-	private WebDriver wd;
+	public WebDriver wd;
 	private GroupHelper groupHelper;
 	private ContactHelper contactHelper;
 	private NavigationHelper navigationHelper;
@@ -37,28 +37,29 @@ public class ApplicationManager {
 	public void init() throws FileNotFoundException, IOException {
 		String target = System.getProperty("target", "local");
 		properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+
+		dbHelper = new DbHelper();
+
 		if ("".equals(properties.getProperty("selenium.server"))) {
 			if (browser.equals(BrowserType.FIREFOX)) {
 				FirefoxBinary binary = new FirefoxBinary(new File(properties.getProperty("pathToFirefoxBrowser")));
 				wd = new FirefoxDriver(binary, new FirefoxProfile());
 			} else if (browser.equals(BrowserType.CHROME)) {
 				wd = new ChromeDriver();
-			} else {
-				DesiredCapabilities capabilities = new DesiredCapabilities();
-				capabilities.setBrowserName(browser);
-				wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), capabilities);
 			}
+		} else {
+			DesiredCapabilities capabilities = new DesiredCapabilities();
+			capabilities.setBrowserName(browser);
+			wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), capabilities);
 		}
-		// wd.manage().window().maximize();
 		wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		wd.get(properties.getProperty("web.baseUrl"));
-		groupHelper = new GroupHelper(wd);
-		contactHelper = new ContactHelper(wd);
-		helperBase = new HelperBase(wd);
-		sessionHelper = new SessionHelper(wd);
-		navigationHelper = new NavigationHelper(wd);
-		dbHelper = new DbHelper();
-		getSessionHelper().login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
+		groupHelper = new GroupHelper(this);
+		contactHelper = new ContactHelper(this);
+		helperBase = new HelperBase(this);
+		sessionHelper = new SessionHelper(this);
+		navigationHelper = new NavigationHelper(this);
+		sessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
 	}
 
 	public void stop() {
@@ -75,23 +76,23 @@ public class ApplicationManager {
 		return dbHelper;
 	}
 	
-	public GroupHelper group() throws MalformedURLException {
+	public GroupHelper group() {
 		return groupHelper;
 	}
 
-	public ContactHelper contact() throws MalformedURLException {
+	public ContactHelper contact() {
 		return contactHelper;
 	}
 
-	public HelperBase getHelperBase() throws MalformedURLException {
+	public HelperBase getHelperBase() {
 		return helperBase;
 	}
 
-	public SessionHelper getSessionHelper() throws MalformedURLException {
+	public SessionHelper getSessionHelper() {
 		return sessionHelper;
 	}
 
-	public NavigationHelper goTo() throws MalformedURLException {
+	public NavigationHelper goTo() {
 		return navigationHelper;
 	}
 }
