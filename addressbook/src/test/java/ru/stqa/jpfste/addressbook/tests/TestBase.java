@@ -31,6 +31,7 @@ public class TestBase {
 	@BeforeSuite
 	public void setUp() throws Exception {
 		app.init();
+		app.getSessionHelper().login(app.getProperty("web.adminLogin"), app.getProperty("web.adminPassword"));
 	}
 
 	@AfterSuite(alwaysRun = true)

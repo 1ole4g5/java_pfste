@@ -14,9 +14,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.BrowserType;
 
-
 public class ApplicationManager {
-
 	private final Properties properties;
 	private WebDriver wd;
 	private String browser;

@@ -2,10 +2,10 @@ package ru.stqa.jpfste.addressbook.appmanager;
 
 import java.util.List;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 
 import ru.stqa.jpfste.addressbook.model.ContactData;
 import ru.stqa.jpfste.addressbook.model.Contacts;

@@ -16,13 +16,12 @@ import org.openqa.selenium.remote.BrowserType;
 
 public class ApplicationManager {
 	private final Properties properties;
-	WebDriver wd;
-
-	public GroupHelper groupHelper;
-	public ContactHelper contactHelper;
-	public NavigationHelper navigationHelper;
-	public SessionHelper sessionHelper;
-	public HelperBase helperBase;
+	private WebDriver wd;
+	private GroupHelper groupHelper;
+	private ContactHelper contactHelper;
+	private NavigationHelper navigationHelper;
+	private SessionHelper sessionHelper;
+	private HelperBase helperBase;
 	private String browser;
 	private DbHelper dbHelper;
 
@@ -34,51 +33,72 @@ public class ApplicationManager {
 	public void init() throws FileNotFoundException, IOException {
 		String target = System.getProperty("target", "local");
 		properties.load(new FileReader(new File(String.format("addressbook/src/test/resources/%s.properties", target))));
-		
-		FirefoxBinary binary = new FirefoxBinary(new File(properties.getProperty("pathToFirefoxBrowser")));
-		
-		dbHelper = new DbHelper();
-		
-		if (browser.equals(BrowserType.FIREFOX)) {
-			wd = new FirefoxDriver(binary, new FirefoxProfile());
-		} else if (browser.equals(BrowserType.CHROME)) {
-			wd = new ChromeDriver();
-		}
-		wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-		wd.get(properties.getProperty("web.baseUrl"));
-		groupHelper = new GroupHelper(this);
-		contactHelper = new ContactHelper(this);
-		navigationHelper = new NavigationHelper(this);
-		sessionHelper = new SessionHelper(this);
-		helperBase = new HelperBase(this);
-		sessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
 	}
 
 	public void stop() {
-		wd.quit();
+		if (wd != null) {
+			wd.quit();
+		}
 	}
 
+	public WebDriver getDriver() {
+		if (wd == null) {
+			if (browser.equals(BrowserType.FIREFOX)) {
+				FirefoxBinary binary = new FirefoxBinary(new File(properties.getProperty("pathToFirefoxBrowser")));
+				wd = new FirefoxDriver(binary, new FirefoxProfile());
+			} else if (browser.equals(BrowserType.CHROME)) {
+				wd = new ChromeDriver();
+			}
+			wd.manage().window().maximize();
+			wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+			wd.get(properties.getProperty("web.baseUrl"));
+		}
+		return wd;
+	}
+	
+	public String getProperty(String key) {
+		return properties.getProperty(key);
+	}
+	
+	public DbHelper db() {
+		if (dbHelper == null) {
+			dbHelper = new DbHelper();
+		}
+		return dbHelper;
+	}
+	
 	public GroupHelper group() {
+		if (groupHelper == null) {
+			groupHelper = new GroupHelper(this);
+		}
 		return groupHelper;
 	}
 
 	public ContactHelper contact() {
+		if (contactHelper == null) {
+			contactHelper = new ContactHelper(this);
+		}
 		return contactHelper;
 	}
 
 	public HelperBase getHelperBase() {
+		if (helperBase == null) {
+			helperBase = new HelperBase(this);
+		}
 		return helperBase;
 	}
 
 	public SessionHelper getSessionHelper() {
+		if (sessionHelper == null) {
+			sessionHelper = new SessionHelper(this);
+		}
 		return sessionHelper;
 	}
 
 	public NavigationHelper goTo() {
+		if (navigationHelper == null) {
+			navigationHelper = new NavigationHelper(this);
+		}
 		return navigationHelper;
-	}
-	
-	public DbHelper db() {
-		return dbHelper;
 	}
 }
