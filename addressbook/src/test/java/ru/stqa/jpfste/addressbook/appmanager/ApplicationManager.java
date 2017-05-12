@@ -49,7 +49,7 @@ public class ApplicationManager {
 				wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), capabilities);
 			}
 		}
-		wd.manage().window().maximize();
+		// wd.manage().window().maximize();
 		wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		wd.get(properties.getProperty("web.baseUrl"));
 		groupHelper = new GroupHelper(wd);
