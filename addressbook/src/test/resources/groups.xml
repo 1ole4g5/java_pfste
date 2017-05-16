@@ -1,1 +1,28 @@
-<?xml version="1.0" ?><list><group><name>name 0</name><header>header 0</header><footer>footer 0</footer></group><group><name>name 1</name><header>header 1</header><footer>footer 1</footer></group><group><name>name 2</name><header>header 2</header><footer>footer 2</footer></group><group><name>name 3</name><header>header 3</header><footer>footer 3</footer></group><group><name>name 4</name><header>header 4</header><footer>footer 4</footer></group></list>
+<?xml version="1.0" ?>
+<list>
+    <group>
+        <name>name 0</name>
+        <header>header 0</header>
+        <footer>footer 0</footer>
+    </group>
+    <group>
+        <name>name 1</name>
+        <header>header 1</header>
+        <footer>footer 1</footer>
+    </group>
+    <group>
+        <name>name 2</name>
+        <header>header 2</header>
+        <footer>footer 2</footer>
+    </group>
+    <group>
+        <name>name 3</name>
+        <header>header 3</header>
+        <footer>footer 3</footer>
+    </group>
+    <group>
+        <name>name 4</name>
+        <header>header 4</header>
+        <footer>footer 4</footer>
+    </group>
+</list>

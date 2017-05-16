@@ -1,18 +1,13 @@
-
 package net.webservicex;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p>
  * <pre>
  * &lt;complexType&gt;
  *   &lt;complexContent&gt;
@@ -24,12 +19,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "getGeoIPContextResult"
+        "getGeoIPContextResult"
 })
 @XmlRootElement(name = "GetGeoIPContextResponse")
 public class GetGeoIPContextResponse {
@@ -39,11 +32,9 @@ public class GetGeoIPContextResponse {
 
     /**
      * Gets the value of the getGeoIPContextResult property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link GeoIP }
-     *     
+     *
+     * @return possible object is
+     * {@link GeoIP }
      */
     public GeoIP getGetGeoIPContextResult() {
         return getGeoIPContextResult;
@@ -51,11 +42,9 @@ public class GetGeoIPContextResponse {
 
     /**
      * Sets the value of the getGeoIPContextResult property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link GeoIP }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link GeoIP }
      */
     public void setGetGeoIPContextResult(GeoIP value) {
         this.getGeoIPContextResult = value;
