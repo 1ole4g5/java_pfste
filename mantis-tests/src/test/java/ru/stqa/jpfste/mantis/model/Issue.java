@@ -10,8 +10,9 @@ public class Issue {
         return id;
     }
 
-    public void withId(int id) {
+    public Issue withId(int id) {
         this.id = id;
+        return this;
     }
 
     public String getSummary() {
