@@ -3,6 +3,7 @@ package ru.stqa.jpfste.sandbox;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+
 public class PointTests {
 
 	@Test

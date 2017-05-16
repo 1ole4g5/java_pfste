@@ -10,6 +10,7 @@ dependencies {
     compile 'org.hamcrest:java-hamcrest:2.0.0.0'
     compile 'commons-net:commons-net:3.6'
     compile 'org.subethamail:subethasmtp:3.1.7'
+    compile 'ch.qos.logback:logback-classic:1.2.2'
     compile 'javax.mail:mailapi:1.4.3'
     compile 'ru.lanwen.verbalregex:java-verbal-expressions:1.4'
     compile 'mysql:mysql-connector-java:6.0.6'

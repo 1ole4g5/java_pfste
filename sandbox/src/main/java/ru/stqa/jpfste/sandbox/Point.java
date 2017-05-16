@@ -1,5 +1,6 @@
 package ru.stqa.jpfste.sandbox;
 
+
 public class Point {
 
 	public double x;
