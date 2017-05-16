@@ -1,9 +1,8 @@
 package ru.stqa.jpfste.mantis.appmanager;
 
 import biz.futureware.mantis.rpc.soap.client.*;
-import ru.stqa.jpfste.mantis.model.Issue;
 import ru.stqa.jpfste.mantis.model.Project;
-
+import ru.stqa.jpfste.mantis.model.SoapIssue;
 
 import javax.xml.rpc.ServiceException;
 import java.math.BigInteger;
@@ -35,17 +34,17 @@ public class SoapHelper{
                     .getMantisConnectPort(new URL(app.getProperty("web.soapUrl")));
     }
 
-    public Issue addIssue(Issue issue) throws MalformedURLException, ServiceException, RemoteException {
+    public SoapIssue addIssue(SoapIssue soapIssue) throws MalformedURLException, ServiceException, RemoteException {
         MantisConnectPortType mc = getMantisConnect();
-        String[] categories = mc.mc_project_get_categories(app.getProperty("web.adminLogin"), app.getProperty("web.adminPassword"), BigInteger.valueOf(issue.getProject().getId()));
+        String[] categories = mc.mc_project_get_categories(app.getProperty("web.adminLogin"), app.getProperty("web.adminPassword"), BigInteger.valueOf(soapIssue.getProject().getId()));
         IssueData issueData = new IssueData();
-        issueData.setSummary(issue.getSummary());
-        issueData.setDescription(issue.getDescription());
-        issueData.setProject(new ObjectRef(BigInteger.valueOf(issue.getProject().getId()), issue.getProject().getName()));
+        issueData.setSummary(soapIssue.getSummary());
+        issueData.setDescription(soapIssue.getDescription());
+        issueData.setProject(new ObjectRef(BigInteger.valueOf(soapIssue.getProject().getId()), soapIssue.getProject().getName()));
         issueData.setCategory(categories[0]);
         BigInteger issueId = mc.mc_issue_add(app.getProperty("web.adminLogin"), app.getProperty("web.adminPassword"), issueData);
         IssueData createIssueData = mc.mc_issue_get(app.getProperty("web.adminLogin"), app.getProperty("web.adminPassword"), issueId);
-        return new Issue().withId(createIssueData.getId().intValue())
+        return new SoapIssue().withId(createIssueData.getId().intValue())
                 .withSummary(createIssueData.getSummary())
                 .withDescription(createIssueData.getDescription())
                 .withProject(new Project().withId(createIssueData.getProject().getId().intValue())

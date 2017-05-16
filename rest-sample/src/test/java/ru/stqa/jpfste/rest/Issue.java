@@ -1,4 +1,4 @@
-package ru.stqa.jpfste.mantis.model;
+package ru.stqa.jpfste.rest;
 
 public class Issue {
     private int id;

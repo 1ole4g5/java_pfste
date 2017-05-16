@@ -1,11 +1,10 @@
 package ru.stqa.jpfste.mantis.tests;
 
 
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import ru.stqa.jpfste.mantis.model.Issue;
 import ru.stqa.jpfste.mantis.model.Project;
+import ru.stqa.jpfste.mantis.model.SoapIssue;
 
 import javax.xml.rpc.ServiceException;
 import java.net.MalformedURLException;
@@ -18,7 +17,7 @@ public class SoapTests extends TestBase {
 
     @BeforeTest
     public void ensurePreconditions() throws RemoteException, ServiceException, MalformedURLException {
-        skipIfNotFixed(0000001);
+        skipIfNotFixedSoap(0000001);
     }
 
     @Test
@@ -33,9 +32,9 @@ public class SoapTests extends TestBase {
     @Test
     public void testCreateIssue()  throws MalformedURLException, ServiceException, RemoteException {
         Set<Project> projects = app.soap().getProjects();
-        Issue issue = new Issue().withSummary("Test issue")
-                .withDescription("Test issue description").withProject(projects.iterator().next());
-        Issue created = app.soap().addIssue(issue);
-        assertEquals(issue.getSummary(), created.getSummary());
+        SoapIssue soapIssue = new SoapIssue().withSummary("Test soapIssue")
+                .withDescription("Test soapIssue description").withProject(projects.iterator().next());
+        SoapIssue created = app.soap().addIssue(soapIssue);
+        assertEquals(soapIssue.getSummary(), created.getSummary());
     }
 }

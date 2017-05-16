@@ -3,7 +3,7 @@ package ru.stqa.jpfste.mantis.tests;
 import biz.futureware.mantis.rpc.soap.client.IssueData;
 import biz.futureware.mantis.rpc.soap.client.MantisConnectLocator;
 import biz.futureware.mantis.rpc.soap.client.MantisConnectPortType;
-import biz.futureware.mantis.rpc.soap.client.ObjectRef;
+import org.apache.http.client.fluent.Executor;
 import org.openqa.selenium.remote.BrowserType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,7 +54,7 @@ public class TestBase {
         logger.info("Stop test: " + m.getName());
     }
 
-    public boolean isIssueOpen(int issueId) throws MalformedURLException, RemoteException, ServiceException {
+    public boolean isIssueOpenSoap(int issueId) throws MalformedURLException, RemoteException, ServiceException {
         MantisConnectPortType mc = new MantisConnectLocator().getMantisConnectPort(new URL(app.getProperty("web.soapUrl")));
         IssueData issue = mc.mc_issue_get(app.getProperty("web.adminLogin"), app.getProperty("web.adminPassword"), BigInteger.valueOf(issueId));
         if (issue.getStatus().getName().equals("resolved")) {
@@ -64,9 +64,27 @@ public class TestBase {
         }
     }
 
-    public void skipIfNotFixed(int issueId) throws MalformedURLException, RemoteException, ServiceException {
-        if (isIssueOpen(issueId)) {
+    public void skipIfNotFixedSoap(int issueId) throws MalformedURLException, RemoteException, ServiceException {
+        if (isIssueOpenSoap(issueId)) {
             throw new SkipException("Ignored because of issue " + issueId);
         }
     }
+//
+//    public boolean isIssueOpen(int issueId) throws IOException, ServiceException {
+//        String json = getExecutor().execute(Request.Get(app.getProperty("web.restUrl")))
+//               .returnContent().asString();
+//                JsonElement parsed = new JsonParser().parse(json);
+//        JsonElement issues = parsed.getAsJsonObject().get("issues");
+//        return 0;
+//    }
+
+    private Executor getExecutor() {
+        return Executor.newInstance().auth(app.getProperty("APIKey"), app.getProperty("APIPass"));
+    }
+
+//    public void skipIfNotFixed(int issueId) throws IOException, ServiceException {
+//        if (isIssueOpen(issueId)) {
+//            throw new SkipException("Ignored because of issue " + issueId);
+//        }
+//    }
 }
